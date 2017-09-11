@@ -1,0 +1,86 @@
+// Name:            Breadcrumb
+// Description:     Defines styles for a breadcrumb navigation
+//
+// Component:       `wex-breadcrumb`
+//
+// States:          `wex-active`
+//
+// Markup:
+//
+// <!-- wex-breadcrumb -->
+// <ul class="wex-breadcrumb">
+//     <li><a href=""></a></li>
+//     <li><span></span></li>
+//     <li class="wex-active"><span></span></li>
+// </ul>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@breadcrumb-font-size:                          1rem;
+
+@breadcrumb-divider:                            "/";
+@breadcrumb-divider-margin:                     8px;
+@breadcrumb-disabled-color:                     #999;
+
+
+/* ========================================================================
+   Component: Breadcrumb
+ ========================================================================== */
+
+/*
+ * 1. Remove default list style
+ * 2. Remove whitespace between child elements when using `inline-block`
+ */
+
+.wex-breadcrumb {
+    /* 1 */
+    padding: 0;
+    list-style: none;
+    /* 2 */
+    font-size: 0.001px;
+    .hook-breadcrumb;
+}
+
+
+/* Items
+ ========================================================================== */
+
+/*
+ * Reset whitespace hack
+ */
+
+.wex-breadcrumb > li {
+    font-size: @breadcrumb-font-size;
+    vertical-align: top;
+}
+
+.wex-breadcrumb > li,
+.wex-breadcrumb > li > a,
+.wex-breadcrumb > li > span { display: inline-block; }
+
+.wex-breadcrumb > li:nth-child(n+2):before {
+    content: @breadcrumb-divider;
+    display: inline-block;
+    margin: 0 @breadcrumb-divider-margin;
+    .hook-breadcrumb-divider;
+}
+
+/*
+ * Disabled
+ */
+
+.wex-breadcrumb > li:not(.wex-active) > span { color: @breadcrumb-disabled-color; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-breadcrumb-misc;
+
+.hook-breadcrumb() {}
+.hook-breadcrumb-divider() {}
+.hook-breadcrumb-misc() {}

@@ -1,0 +1,45 @@
+//
+// Component: Block
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@block-default-background:                      @global-background;
+
+
+// Component
+// ========================================================================
+
+.hook-block() {}
+
+
+// Color modifier
+// ========================================================================
+
+.hook-block-default() {}
+
+.hook-block-muted() {}
+
+.hook-block-secondary() {}
+
+.hook-block-primary() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-block-misc() {
+
+    /*
+     * Adjust padding between equal colored blocks
+     */
+
+    .wex-block-default + .wex-block-default,
+    .wex-block-muted + .wex-block-muted,
+    .wex-block-primary + .wex-block-primary,
+    .wex-block-secondary + .wex-block-secondary { padding-top: 0; }
+
+}

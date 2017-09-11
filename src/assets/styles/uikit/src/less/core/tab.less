@@ -1,0 +1,368 @@
+// Name:            Tab
+// Description:     Defines styles for a tabbed navigation
+//
+// Component:       `wex-tab`
+//
+// Modifiers:       `wex-tab-flip`
+//                  `wex-tab-center`
+//                  `wex-tab-grid`
+//                  `wex-tab-bottom`
+//                  `wex-tab-left`
+//                  `wex-tab-right`
+//                  `wex-tab-responsive`
+//
+// States:          `wex-active`
+//                  `wex-disabled`
+//
+// Markup:
+//
+// <!-- wex-tab -->
+// <ul class="wex-tab" data-wex-tab>
+//     <li class="wex-active"><a href=""></a></li>
+//     <li><a href=""></a></li>
+// </ul>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@tab-border:                                    #ddd;
+@tab-border-width:                              1px;
+@tab-padding-horizontal:                        12px;
+@tab-padding-vertical:                          8px;
+@tab-padding-top:                               @tab-padding-vertical;
+@tab-padding-bottom:                            @tab-padding-vertical;
+@tab-margin-horizontal:                         5px;
+@tab-margin-vertical:                           5px;
+@tab-color:                                     #07D;
+@tab-hover-border:                              #f5f5f5;
+@tab-hover-background:                          #f5f5f5;
+@tab-hover-color:                               #059;
+@tab-active-border:                             #ddd;
+@tab-active-background:                         #fff;
+@tab-active-color:                              #444;
+@tab-disabled-color:                            #999;
+
+
+/* ========================================================================
+   Component: Tab
+ ========================================================================== */
+
+.wex-tab {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: @tab-border-width solid @tab-border;
+}
+
+/*
+ * Micro clearfix on the deepest container
+ */
+
+.wex-tab:before,
+.wex-tab:after {
+    content: "";
+    display: table;
+}
+
+.wex-tab:after { clear: both; }
+
+/*
+ * Items
+ * 1. Create position context for dropdowns
+ */
+
+.wex-tab > li {
+    margin-bottom: -@tab-border-width;
+    float: left;
+    /* 1 */
+    position: relative;
+}
+
+.wex-tab > li > a {
+    display: block;
+    padding: @tab-padding-top @tab-padding-horizontal @tab-padding-bottom @tab-padding-horizontal;
+    border: @tab-border-width solid transparent;
+    border-bottom-width: 0;
+    color: @tab-color;
+    text-decoration: none;
+    .hook-tab;
+}
+
+.wex-tab > li:nth-child(n+2) > a { margin-left: @tab-margin-horizontal; }
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Also apply if dropdown is opened
+ * 3. Remove default focus style
+ */
+
+.wex-tab > li > a:hover,
+.wex-tab > li > a:focus, // 1
+.wex-tab > li.wex-open > a { // 2
+    border-color: @tab-hover-border;
+    background: @tab-hover-background;
+    color: @tab-hover-color;
+    /* 2 */
+    outline: none;
+    .hook-tab-hover;
+}
+
+.wex-tab > li:not(.wex-active) > a:hover,
+.wex-tab > li:not(.wex-active) > a:focus,
+.wex-tab > li.wex-open:not(.wex-active) > a {
+    margin-bottom: @tab-border-width;
+    padding-bottom: @tab-padding-bottom - @tab-border-width;
+}
+
+/* Active */
+.wex-tab > li.wex-active > a {
+    border-color: @tab-active-border;
+    border-bottom-color: transparent;
+    background: @tab-active-background;
+    color: @tab-active-color;
+    .hook-tab-active;
+}
+
+/* Disabled */
+.wex-tab > li.wex-disabled > a {
+    color: @tab-disabled-color;
+    cursor: text;
+    .hook-tab-disabled;
+}
+
+.wex-tab > li.wex-disabled > a:hover,
+.wex-tab > li.wex-disabled > a:focus,
+.wex-tab > li.wex-disabled.wex-active > a {
+    background: none;
+    border-color: transparent;
+}
+
+
+/* Modifier: 'tab-flip'
+ ========================================================================== */
+
+.wex-tab-flip > li { float: right; }
+
+.wex-tab-flip > li:nth-child(n+2) > a {
+    margin-left: 0;
+    margin-right: @tab-margin-horizontal;
+}
+
+
+/* Modifier: 'tab-responsive'
+ ========================================================================== */
+
+.wex-tab > li.wex-tab-responsive > a {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/*
+ * Icon
+ */
+
+.wex-tab-responsive > a:before {
+    content: "\f0c9\00a0";
+    font-family: FontAwesome;
+}
+
+
+/* Modifier: 'tab-center'
+ ========================================================================== */
+
+.wex-tab-center { border-bottom: @tab-border-width solid @tab-border; }
+
+.wex-tab-center-bottom {
+    border-bottom: none;
+    border-top: @tab-border-width solid @tab-border;
+}
+
+.wex-tab-center:before,
+.wex-tab-center:after {
+    content: "";
+    display: table;
+}
+
+.wex-tab-center:after { clear: both; }
+
+
+/*
+ * 1. Using `right` to prevent vertical scrollbar caused by centering if to many tabs
+ */
+
+.wex-tab-center .wex-tab {
+    position: relative;
+    right: 50%;
+    border: none;
+    float: right;
+}
+
+.wex-tab-center .wex-tab > li {
+    position: relative;
+    right: -50%;
+}
+
+.wex-tab-center .wex-tab > li > a { text-align: center; }
+
+
+/* Modifier: 'tab-bottom'
+ ========================================================================== */
+
+.wex-tab-bottom {
+    border-top: @tab-border-width solid @tab-border;
+    border-bottom: none;
+}
+
+.wex-tab-bottom > li {
+    margin-top: -@tab-border-width;
+    margin-bottom: 0;
+}
+
+.wex-tab-bottom > li > a {
+    padding-top: @tab-padding-bottom;
+    padding-bottom: @tab-padding-top;
+    border-bottom-width: @tab-border-width;
+    border-top-width: 0;
+}
+
+.wex-tab-bottom > li:not(.wex-active) > a:hover,
+.wex-tab-bottom > li:not(.wex-active) > a:focus,
+.wex-tab-bottom > li.wex-open:not(.wex-active) > a {
+    margin-bottom: 0;
+    margin-top: @tab-border-width;
+    padding-bottom: @tab-padding-top;
+    padding-top: @tab-padding-bottom - @tab-border-width;
+}
+
+.wex-tab-bottom > li.wex-active > a {
+    border-top-color: transparent;
+    border-bottom-color: @tab-active-border;
+}
+
+
+/* Modifier: 'tab-grid'
+ ========================================================================== */
+
+/*
+ * 1. Create position context to prevent hidden border because of negative `z-index`
+ */
+
+.wex-tab-grid {
+    margin-left: -@tab-margin-horizontal;
+    border-bottom: none;
+    /* 1 */
+    position: relative;
+    z-index: 0;
+}
+
+.wex-tab-grid:before {
+    display: block;
+    position: absolute;
+    left: @tab-margin-horizontal;
+    right: 0;
+    bottom: -@tab-border-width;
+    border-top: @tab-border-width solid @tab-border;
+    /* 1 */
+    z-index: -1;
+}
+
+.wex-tab-grid > li:first-child > a { margin-left: @tab-margin-horizontal; }
+
+.wex-tab-grid > li > a { text-align: center; }
+
+/*
+ * If `wex-tab-bottom`
+ */
+
+.wex-tab-grid.wex-tab-bottom { border-top: none; }
+.wex-tab-grid.wex-tab-bottom:before {
+    top: -@tab-border-width;
+    bottom: auto;
+}
+
+
+/* Modifier: 'tab-left', 'tab-right'
+ ========================================================================== */
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .wex-tab-left,
+    .wex-tab-right { border-bottom: none; }
+
+    .wex-tab-left > li,
+    .wex-tab-right > li {
+        margin-bottom: 0;
+        float: none;
+    }
+
+    .wex-tab-left > li > a,
+    .wex-tab-right > li > a {
+        padding-top: @tab-padding-vertical;
+        padding-bottom: @tab-padding-vertical;
+    }
+
+    .wex-tab-left > li:nth-child(n+2) > a,
+    .wex-tab-right > li:nth-child(n+2) > a {
+        margin-left: 0;
+        margin-top: @tab-margin-vertical;
+    }
+
+    .wex-tab-left > li.wex-active > a,
+    .wex-tab-right > li.wex-active > a { border-color: @tab-active-border; }
+
+    /*
+     * Modifier: 'tab-left'
+     */
+
+    .wex-tab-left { border-right: @tab-border-width solid @tab-border; }
+    .wex-tab-left > li { margin-right: -@tab-border-width; }
+    .wex-tab-left > li > a {
+        border-bottom-width: @tab-border-width;
+        border-right-width: 0;
+    }
+    .wex-tab-left > li:not(.wex-active) > a:hover,
+    .wex-tab-left > li:not(.wex-active) > a:focus {
+        margin-bottom: 0;
+        margin-right: @tab-border-width;
+        padding-bottom: @tab-padding-vertical;
+        padding-right: @tab-padding-horizontal - @tab-border-width;
+    }
+    .wex-tab-left > li.wex-active > a { border-right-color: transparent; }
+
+    /*
+     * Modifier: 'tab-right'
+     */
+
+    .wex-tab-right { border-left: @tab-border-width solid @tab-border; }
+    .wex-tab-right > li { margin-left: -@tab-border-width; }
+    .wex-tab-right > li > a {
+        border-bottom-width: @tab-border-width;
+        border-left-width: 0;
+    }
+    .wex-tab-right > li:not(.wex-active) > a:hover,
+    .wex-tab-right > li:not(.wex-active) > a:focus {
+        margin-bottom: 0;
+        margin-left: @tab-border-width;
+        padding-bottom: @tab-padding-vertical;
+        padding-left: @tab-padding-horizontal - @tab-border-width;
+    }
+    .wex-tab-right > li.wex-active > a { border-left-color: transparent; }
+
+}
+
+
+// Hooks
+// ========================================================================
+
+.hook-tab-misc;
+
+.hook-tab() {}
+.hook-tab-hover() {}
+.hook-tab-active() {}
+.hook-tab-disabled() {}
+.hook-tab-misc() {}

@@ -1,0 +1,197 @@
+// Name:            Datepicker
+// Description:     Defines styles for a datepicker
+//
+// Component:       `wex-datepicker`
+//
+// Modifiers:       `wex-datepicker-nav`
+//                  `wex-datepicker-previous`
+//                  `wex-datepicker-next`
+//                  `wex-datepicker-heading`
+//                  `wex-datepicker-table`
+//                  `wex-datepicker-table-muted`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@datepicker-z-index:                            1050;
+@datepicker-animation:                          wex-fade;
+
+@datepicker-nav-height:                         20px;
+@datepicker-nav-margin-bottom:                  15px;
+@datepicker-nav-color:                          #444;
+@datepicker-nav-hover-color:                    #444;
+@datepicker-previous-icon:                      "\f053";
+@datepicker-next-icon:                          "\f054";
+
+@datepicker-table-width:                        26px;
+@datepicker-table-height:                       24px;
+@datepicker-table-color:                        #444;
+
+@datepicker-table-hover-background:             #ddd;
+@datepicker-table-hover-color:                  #444;
+@datepicker-table-onclick-background:           #ccc;
+@datepicker-table-onclick-color:                #444;
+
+@datepicker-table-active-background:            #00a8e6;
+@datepicker-table-active-color:                 #fff;
+
+@datepicker-table-muted-color:                  #999;
+
+
+/* ========================================================================
+   Component: Datepicker
+ ========================================================================== */
+
+/*
+ * 1. Highest z-index
+ * 2. Reset dropdown width
+ * 3. Set animation
+ * 4. Needed for scale animation
+ */
+
+.wex-datepicker {
+    /* 1 */
+    z-index: @datepicker-z-index;
+    /* 2 */
+    width: auto;
+    /* 3 */
+    -webkit-animation: @datepicker-animation 0.2s ease-in-out;
+    animation: @datepicker-animation 0.2s ease-in-out;
+    /* 4 */
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+
+/* Sub-object: `wex-datepicker-nav`
+========================================================================== */
+
+.wex-datepicker-nav {
+    margin-bottom: @datepicker-nav-margin-bottom;
+    text-align: center;
+    line-height: @datepicker-nav-height;
+    .hook-datepicker-nav;
+}
+
+/*
+ * Micro clearfix
+ */
+
+.wex-datepicker-nav:before,
+.wex-datepicker-nav:after {
+    content: "";
+    display: table;
+}
+
+.wex-datepicker-nav:after { clear: both; }
+
+/*
+ * Previous and next navigation
+ */
+
+.wex-datepicker-nav a {
+    color: @datepicker-nav-color;
+    text-decoration: none;
+    .hook-datepicker-nav-item;
+}
+
+.wex-datepicker-nav a:hover { color: @datepicker-nav-hover-color; }
+
+.wex-datepicker-previous { float: left; }
+.wex-datepicker-next { float: right; }
+
+.wex-datepicker-previous:after,
+.wex-datepicker-next:after {
+    width: @datepicker-nav-height;
+    font-family: FontAwesome;
+}
+
+.wex-datepicker-previous:after { content: @datepicker-previous-icon; }
+.wex-datepicker-next:after { content: @datepicker-next-icon; }
+
+
+/* Sub-object: `wex-datepicker-heading`
+========================================================================== */
+
+.wex-datepicker-heading {}
+
+
+/* Sub-object: `wex-datepicker-table`
+========================================================================== */
+
+/* Block element behavior */
+.wex-datepicker-table { width: 100%; }
+
+.wex-datepicker-table th,
+.wex-datepicker-table td { padding: 2px; }
+
+.wex-datepicker-table th { font-size: 12px; }
+
+/*
+ * Item
+ */
+
+.wex-datepicker-table a {
+    display: block;
+    width: @datepicker-table-width;
+    line-height: @datepicker-table-height;
+    text-align: center;
+    color: @datepicker-table-color;
+    text-decoration: none;
+    .hook-datepicker-table-item;
+}
+
+/*
+ * Sub-object: `wex-datepicker-table-muted`
+ */
+
+a.wex-datepicker-table-muted { color: @datepicker-table-muted-color; }
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+
+.wex-datepicker-table a:hover,
+.wex-datepicker-table a:focus { // 1
+    background-color: @datepicker-table-hover-background;
+    color: @datepicker-table-hover-color;
+    /* 2 */
+    outline: none;
+    .hook-datepicker-table-item-hover;
+}
+
+/* OnClick */
+.wex-datepicker-table a:active {
+    background-color: @datepicker-table-onclick-background;
+    color: @datepicker-table-onclick-color;
+    .hook-datepicker-table-item-onclick;
+}
+
+/*
+ * Active
+ */
+
+.wex-datepicker-table a.wex-active {
+    background: @datepicker-table-active-background;
+    color: @datepicker-table-active-color;
+    .hook-datepicker-table-item-active;
+}
+
+
+// Hooks
+// ========================================================================
+
+.hook-datepicker-misc;
+
+.hook-datepicker-nav() {}
+.hook-datepicker-nav-item() {}
+.hook-datepicker-table-item() {}
+.hook-datepicker-table-item-hover() {}
+.hook-datepicker-table-item-onclick() {}
+.hook-datepicker-table-item-active() {}
+.hook-datepicker-misc() {}

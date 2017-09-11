@@ -1,0 +1,34 @@
+// Name:            Upload
+// Description:     Provides a dragover state for uploads
+//
+// Component:       `wex-upload`
+//
+// States:          `wex-dragover`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@wex-upload-dragover-box-shadow:                 rgba(100,100,100,0.3);
+@wex-upload-dragover-box-shadow-blur:            20px;
+
+
+/* ========================================================================
+   Component: Upload
+ ========================================================================== */
+
+/*
+ * Create a box-shadow when dragging a file over the upload area
+ */
+
+.wex-dragover { box-shadow: 0 0 @wex-upload-dragover-box-shadow-blur @wex-upload-dragover-box-shadow; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-upload-misc;
+
+.hook-upload-misc() {}

@@ -1,0 +1,208 @@
+// Name:            Slideshow
+// Description:     Defines styles for a slideshow
+//
+// Component:       `wex-slideshow`
+//
+// Modifier:        `wex-slideshow-fullscreen`
+//
+// Sub-modifier:    `wex-slideshow-fade-out`
+//                  `wex-slideshow-scroll-forward-in`
+//                  `wex-slideshow-scroll-forward-out`
+//                  `wex-slideshow-scroll-backward-in`
+//                  `wex-slideshow-scroll-backward-out`
+//                  `wex-slideshow-scale-out`
+//                  `wex-slideshow-swipe-forward-in`
+//                  `wex-slideshow-swipe-forward-out`
+//                  `wex-slideshow-swipe-backward-in`
+//                  `wex-slideshow-swipe-backward-out`
+//
+// States:          `wex-active`
+//
+// Uses:            Cover (JS)
+//
+// Markup:
+//
+// <!-- wex-slideshow -->
+// <ul class="wex-slideshow" data-wex-slideshow>
+//     <li><img src="" width="" height="" alt=""></li>
+// </ul>
+//
+// ========================================================================
+
+
+/* ========================================================================
+   Component: Slideshow
+ ========================================================================== */
+
+/*
+ * 1. Create position context
+ * 2. Create stacking context to prevent z-index issues with other components
+ * 3. Set width because child elements are positioned absolute. Height is set via JS
+ * 4. Reset list style
+ * 5. Clip child elements
+ * 6. Deactivate browser history navigation in IE11
+ */
+
+.wex-slideshow {
+    /* 1 */
+    position: relative;
+    /* 2 */
+    z-index: 0;
+    /* 3 */
+    width: 100%;
+    /* 4 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /* 5 */
+    overflow: hidden;
+    /* 6 */
+    touch-action: pan-y;
+}
+
+/*
+ * Sub-object item
+ * 1. Position items above each other
+ * 2. Expand to parent container width
+ * 3. Hide by default
+ */
+
+.wex-slideshow > li {
+    /* 1 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* 2 */
+    width: 100%;
+    /* 3 */
+    opacity: 0;
+}
+
+/*
+ * Active
+ * 1. Stack at first
+ * 2. Show slide
+ */
+
+.wex-slideshow > .wex-active {
+    /* 1 */
+    z-index: 10;
+    /* 2 */
+    opacity: 1;
+}
+
+/*
+ * Hide default images which is only relevant to keep existing proportions
+ */
+
+.wex-slideshow > li > img { visibility: hidden; }
+
+/*
+ * Pointer for controls
+ */
+
+[data-wex-slideshow-slide] { cursor: pointer; }
+
+
+/* Modifier: `wex-slideshow-fullscreen`
+ ========================================================================== */
+
+.wex-slideshow-fullscreen,
+.wex-slideshow-fullscreen > li { height: 100vh; }
+
+
+/* Animations
+ ========================================================================== */
+
+/*
+ * Fade
+ */
+
+ .wex-slideshow-fade-in {
+     -webkit-animation: wex-fade 0.5s linear;
+     animation: wex-fade 0.5s linear;
+ }
+
+.wex-slideshow-fade-out {
+    -webkit-animation: wex-fade 0.5s linear reverse;
+    animation: wex-fade 0.5s linear reverse;
+}
+
+/*
+ * Scroll
+ */
+
+.wex-slideshow-scroll-forward-in {
+    -webkit-animation: wex-slide-right 0.5s ease-in-out;
+    animation: wex-slide-right 0.5s ease-in-out;
+}
+
+.wex-slideshow-scroll-forward-out {
+    -webkit-animation: wex-slide-left 0.5s ease-in-out reverse;
+    animation: wex-slide-left 0.5s ease-in-out reverse;
+}
+
+.wex-slideshow-scroll-backward-in {
+    -webkit-animation: wex-slide-left 0.5s ease-in-out;
+    animation: wex-slide-left 0.5s ease-in-out;
+}
+
+.wex-slideshow-scroll-backward-out {
+    -webkit-animation: wex-slide-right 0.5s ease-in-out reverse;
+    animation: wex-slide-right 0.5s ease-in-out reverse;
+}
+
+/*
+ * Scale
+ */
+
+.wex-slideshow-scale-out {
+    -webkit-animation: wex-fade-scale-15 0.5s ease-in-out reverse;
+    animation: wex-fade-scale-15 0.5s ease-in-out reverse;
+}
+
+/*
+ * Swipe
+ */
+
+.wex-slideshow-swipe-forward-in {
+    -webkit-animation: wex-slide-left-33 0.5s ease-in-out;
+    animation: wex-slide-left-33 0.5s ease-in-out;
+}
+
+.wex-slideshow-swipe-forward-out {
+    -webkit-animation: wex-slide-left 0.5s ease-in-out reverse;
+    animation: wex-slide-left 0.5s ease-in-out reverse;
+}
+
+.wex-slideshow-swipe-backward-in {
+    -webkit-animation: wex-slide-right-33 0.5s ease-in-out;
+    animation: wex-slide-right-33 0.5s ease-in-out;
+}
+
+.wex-slideshow-swipe-backward-out {
+    -webkit-animation: wex-slide-right 0.5s ease-in-out reverse;
+    animation: wex-slide-right 0.5s ease-in-out reverse;
+}
+
+.wex-slideshow-swipe-forward-in:before,
+.wex-slideshow-swipe-backward-in:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: rgba(0,0,0,0.6);
+    -webkit-animation: wex-fade 0.5s ease-in-out reverse;
+    animation: wex-fade 0.5s ease-in-out reverse;
+}
+
+
+// Hooks
+// ========================================================================
+
+.hook-slideshow-misc;
+
+.hook-slideshow-misc() {}

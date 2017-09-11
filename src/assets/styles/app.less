@@ -1,0 +1,378 @@
+@import "mixins";
+//主题一
+//@import "./variables-default";
+//@import "./uikit/themes/default/uikit";
+//主题二
+@import "./variables-almost-flat";
+@import "./uikit/themes/almost-flat/uikit";
+//主题三
+//@import "./variables-gradient";
+//@import "./uikit/themes/gradient/uikit";
+@import "../fonts/iconfont.css";
+@import "color";
+@import "./uikit/src/less/components/multi-select";
+@import "multiselect";
+@import "richContentReest";
+body {
+  background-color: #f4f4f4;
+  min-width: @base-width;
+  * {
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.container {
+  width: @base-width;
+  margin: 0 auto;
+}
+
+.wex-html-height-100 {
+  height: 100%;
+  body {
+    height: 100%;
+    >[class^="p-"] {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .g-vertical-middle {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.g-vertical-middle {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.wex-form {
+  .input-error-hint {
+    display: block;
+    color: @danger-color;
+    position: absolute;
+    left: 0;
+    padding: 0 6px;
+    top: 100%;
+    line-height: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden
+  }
+}
+
+.wex-card {
+  .all-border-box();
+  background-color: #fff;
+  padding: 15px;
+  .wex-card-title {
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    font-weight: bold;
+    color: @base-title-color;
+    border-bottom: 1px solid @global-border;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    padding: 0 5px;
+    position: relative;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      width: 5px;
+      height: 18px;
+      margin-top: -9px;
+      background-color: @base-title-color;
+    }
+    p,
+    a {
+      font-size: 14px;
+      font-weight: normal;
+    }
+    p {
+      color: @global-color;
+    }
+  }
+}
+
+.debug {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  width: 300px;
+  background-color: #fff;
+  padding: 5px;
+  overflow: auto;
+  max-height: 99%;
+  margin-top: 0;
+  z-index: 9999999999;
+}
+
+.box-wrap {
+  background: #fff;
+  .header {
+    height: 55px;
+    line-height: 55px;
+    .tt {
+      text-align: left;
+      color: #474e5d;
+      text-indent: 20px;
+      font-weight: 600;
+    }
+  }
+}
+
+.text-link-default {
+  color: @global-color;
+  &:hover {
+    color: @base-color;
+    text-decoration: none;
+  }
+}
+
+.text-link {
+  color: @global-muted-color;
+  &:hover {
+    color: @global-primary-background;
+    text-decoration: none;
+  }
+}
+
+.text-large {
+  font-size: 20px;
+}
+
+.text-default {
+  font-size: 16px;
+}
+
+.text-small {
+  font-size: 14px;
+}
+
+.text-little {
+  font-size: 12px;
+}
+
+.text-big {
+  font-size: 18px;
+}
+
+.wex-label-small,
+.wex-label {
+  display: inline-block;
+  margin-right: 10px;
+  color: @global-primary-background;
+  border-radius: 30px;
+  border: 1px solid @global-primary-background;
+}
+
+.wex-label {
+  font-size: 14px;
+  padding: 4px 10px;
+  line-height: 14px;
+}
+
+.wex-label-small {
+  font-size: 12px;
+  padding: 4px 10px;
+  line-height: 12px;
+}
+
+.wex-progress {
+  width: 160px;
+  height: 6px;
+  background: #dfdfdf;
+  border-radius: 10px;
+  .bar {
+    height: 100%;
+    border-radius: 10px;
+    background: @global-primary-background;
+    display: block;
+    transition: .3s all;
+  }
+}
+
+.table-background {
+  width: 100%;
+  text-align: center;
+  color: #666;
+  border-collapse: collapse;
+  border-spacing: 0;
+  thead {
+    td,
+    th {
+      background-color: #ddd;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-weight: normal;
+      font-size: 14px;
+    }
+  }
+  tbody {
+    td {
+      background-color: #f6f6f6;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 14px;
+    }
+  }
+}
+
+.wex-table-two {
+  th {
+    background-color: #E5E9F2;
+    font-size: 14px;
+    color: #475669;
+    font-weight: 700;
+    padding: 12px 12px;
+    border-bottom: 0;
+  }
+  tbody td {
+    color: #787878;
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@tabsHeadHeight: 58px;
+.m-tabs-box {
+  font-size: 16px;
+  overflow: hidden;
+  .header {
+    height: @tabsHeadHeight;
+    margin-bottom: 20px;
+   border-bottom: 1px solid #e6e6e6;
+    .item {
+      height: 55px;
+      line-height: @tabsHeadHeight;
+      list-style: none;
+      float: left;
+      padding: 0 20px;
+      text-decoration: none;
+      transition: all .3s;
+      border-bottom: 2px solid #fff;
+      a {
+        color: @base-title-color;
+        &:hover {
+          color: @base-color;
+        }
+      }
+    }
+    .item.active {
+      a {
+        color: @base-color;
+      }
+      border-bottom: 2px solid @base-color;
+    }
+  }
+}
+
+.wex-input-error {
+  height: 30px;
+  line-height: 30px;
+  text-align: right;
+}
+
+.loading-icon-spinner {
+  -webkit-animation: nprogress-spinner 500ms linear infinite;
+  animation: nprogress-spinner 500ms linear infinite;
+  display: inline-block;
+}
+
+
+/* Make clicks pass-through */
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: @base-color;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+
+/* Fancy blur effect */
+
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px @base-color, 0 0 5px @base-color;
+  opacity: 1.0;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+
+/* Remove these to get rid of the spinner */
+
+#nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: 1031;
+  top: 15px;
+  right: 15px;
+}
+
+#nprogress .spinner-icon {
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  border: solid 2px transparent;
+  border-top-color: @base-color;
+  border-left-color: @base-color;
+  border-radius: 50%;
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+  animation: nprogress-spinner 400ms linear infinite;
+}
+
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes nprogress-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

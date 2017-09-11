@@ -1,0 +1,337 @@
+//
+// Component: Button
+//
+// ========================================================================
+
+// Variables
+// ========================================================================
+
+@button-height: @global-height;
+@button-mini-height: @global-height-mini;
+@button-small-height: @global-height-small;
+@button-large-height: @global-height-large;
+
+@button-line-height: @global-height - 2;
+@button-mini-line-height: @global-height-mini - 2;
+@button-small-line-height: @global-height-small - 2;
+@button-large-line-height: @global-height-large - 2;
+
+@button-mini-font-size: round((@global-font-size * 0.78)); // 11px / 12px
+@button-small-font-size: round((@global-font-size * 0.85)); // 12px / 14px
+@button-large-font-size: round((@global-font-size * 1.14)); // 16px / 18px
+
+@button-background: @global-default-background;
+@button-color: @global-color;
+@button-hover-background: @global-default-hover-background;
+@button-hover-color: @global-color;
+@button-active-background: @global-default-active-background;
+@button-active-color: @global-color;
+
+@button-primary-background: @global-primary-background;
+@button-primary-color: @global-contrast-color;
+@button-primary-hover-color: @global-contrast-color;
+@button-primary-active-color: @global-contrast-color;
+
+@button-success-background: @global-success-background;
+@button-success-color: @global-contrast-color;
+@button-success-hover-color: @global-contrast-color;
+@button-success-active-color: @global-contrast-color;
+
+@button-danger-background: @global-danger-background;
+@button-danger-color: @global-contrast-color;
+@button-danger-hover-color: @global-contrast-color;
+@button-danger-active-color: @global-contrast-color;
+
+@button-disabled-background: #eaeaea;
+@button-disabled-color: @global-muted-color;
+
+@button-link-color: @global-link-color;
+@button-link-hover-color: @global-link-hover-color;
+@button-link-disabled-color: @global-muted-color;
+
+//
+// New
+//
+
+@button-border: rgba(0, 0, 0, 0.06);
+@button-hover-border: rgba(0, 0, 0, 0.16);
+@button-text-shadow: @global-text-shadow;
+@button-contrast-text-shadow: @global-contrast-text-shadow;
+@button-contrast-hover-border: rgba(0, 0, 0, 0);
+
+@button-group-border: rgba(0, 0, 0, 0.1);
+
+// Component
+// ========================================================================
+
+.hook-button() {
+  border:        1px solid @button-border;
+  border-radius: @global-border-radius;
+  //text-shadow: 0 1px 0 @button-text-shadow;
+}
+
+.hook-button-hover() {
+  border-color: @button-hover-border;
+}
+
+.hook-button-active() {
+}
+
+// Color modifiers
+// ========================================================================
+
+//
+// Modifier: `wex-button-primary`
+//
+
+.hook-button-primary() {
+}
+
+.hook-button-primary-hover() {
+}
+
+.hook-button-primary-active() {
+}
+
+//
+// Modifier: `wex-button-success`
+//
+
+.hook-button-success() {
+}
+
+.hook-button-success-hover() {
+}
+
+.hook-button-success-active() {
+}
+
+//
+// Modifier: `wex-button-danger`
+//
+
+.hook-button-danger() {
+}
+
+.hook-button-danger-hover() {
+}
+
+.hook-button-danger-active() {
+}
+
+// Disabled state
+// ========================================================================
+
+.hook-button-disable() {
+  //border-color: @button-border;
+  border-color: transparent;
+  box-shadow:   none;
+  //text-shadow: 0 1px 0 @button-text-shadow;
+  &:hover {
+    border-color: transparent;
+  }
+}
+
+// Modifier: `wex-button-link`
+// ========================================================================
+
+.hook-button-link() {
+  box-shadow:  none;
+  text-shadow: none;
+}
+
+// Size modifiers
+// ========================================================================
+
+.hook-button-large() {
+  border-radius: @global-border-radius;
+}
+
+// Miscellaneous
+// ========================================================================
+
+.hook-button-misc() {
+
+  /* Color modifiers
+   ========================================================================== */
+
+  .wex-button-primary,
+  .wex-button-success,
+  .wex-button-danger {
+    border-color: transparent;
+    //box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    //text-shadow: 0 -1px 0 @button-contrast-text-shadow;
+  }
+  .wex-button-primary-r,
+  .wex-button-success-r,
+  .wex-button-danger-r {
+    background-color: transparent;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: transparent;
+    }
+    &:disabled {
+      background-color: @button-disabled-background;
+      color:            @button-disabled-color;
+      border-color:     transparent;
+      &:hover,
+      &:focus,
+      &:active {
+        color: @button-disabled-color;
+      }
+    }
+  }
+  .wex-button-primary-r {
+    border-color: @button-primary-background;
+    color:        @button-primary-background;
+    &:hover,
+    &:focus,
+    &:active{
+      border-color: @button-primary-hover-background;
+      color:        @button-primary-hover-background;
+    }
+  }
+  .wex-button-success-r {
+    border-color: @button-success-background;
+    color:        @button-success-background;
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: @button-success-hover-background;
+      color:        @button-success-hover-background;
+    }
+  }
+  .wex-button-danger-r {
+    border-color: @button-danger-background;
+    color:        @button-danger-background;
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: @button-danger-hover-background;
+      color:        @button-danger-hover-background;
+    }
+  }
+  .wex-button-primary:hover, .wex-button-primary:focus,
+  .wex-button-success:hover, .wex-button-success:focus,
+  .wex-button-danger:hover, .wex-button-danger:focus {
+    border-color: @button-contrast-hover-border;
+  }
+
+  /* Sub-object `wex-button-group`
+   ========================================================================== */
+
+  /*
+   * Reset border-radius
+   */
+
+  .wex-button-group > .wex-button:not(:first-child):not(:last-child),
+  .wex-button-group > div:not(:first-child):not(:last-child) .wex-button {
+    border-style:       solid;
+    border-left-width:  1px;
+    border-left-color:  @button-group-border;
+    border-right-color: @button-group-border;
+    border-radius:      0;
+    &.wex-button-primary-r {
+      border-left-color:  @button-primary-background;
+      border-right-color: @button-primary-background;
+      &:hover {
+        border-left-color:  @button-primary-hover-background;
+        border-right-color: @button-primary-hover-background;
+      }
+    }
+    &.wex-button-success-r {
+      border-left-color:  @button-success-background;
+      border-right-color: @button-success-background;
+      &:hover {
+        border-left-color:  @button-success-hover-background;
+        border-right-color: @button-success-hover-background;
+      }
+    }
+    &.wex-button-danger-r {
+      border-left-color:  @button-danger-background;
+      border-right-color: @button-danger-background;
+      &:hover {
+        border-left-color:  @button-danger-hover-background;
+        border-right-color: @button-danger-hover-background;
+      }
+    }
+  }
+
+  .wex-button-group > .wex-button:first-child,
+  .wex-button-group > div:first-child .wex-button {
+    border-style:               solid;
+    border-right-width:         1px;
+    border-right-color:         @button-group-border;
+    border-top-right-radius:    0;
+    border-bottom-right-radius: 0;
+    &.wex-button-primary-r {
+      border-right-color: @button-primary-background;
+      &:hover {
+        border-right-color: @button-primary-hover-background;
+      }
+    }
+    &.wex-button-success-r {
+      border-right-color: @button-success-background;
+      &:hover {
+        border-right-color: @button-success-hover-background;
+      }
+    }
+    &.wex-button-danger-r {
+      border-right-color: @button-danger-background;
+      &:hover {
+        border-right-color: @button-danger-hover-background;
+      }
+    }
+  }
+
+  .wex-button-group > .wex-button:last-child,
+  .wex-button-group > div:last-child .wex-button {
+    border-style:              solid;
+    border-left-width:         1px;
+    border-left-color:         @button-group-border;
+    border-top-left-radius:    0;
+    border-bottom-left-radius: 0;
+    &.wex-button-primary-r {
+      border-left-color: @button-primary-background;
+      &:hover {
+        border-left-color: @button-primary-hover-background;
+      }
+    }
+    &.wex-button-success-r {
+      border-left-color: @button-success-background;
+      &:hover {
+        border-left-color: @button-success-hover-background;
+      }
+    }
+    &.wex-button-danger-r {
+      border-left-color: @button-danger-background;
+      &:hover {
+        border-left-color: @button-danger-hover-background;
+      }
+    }
+  }
+
+  /*
+   * Collapse border
+   */
+
+  .wex-button-group > .wex-button:nth-child(n+2),
+  .wex-button-group > div:nth-child(n+2) .wex-button {
+    margin-left: -1px;
+  }
+
+  /*
+   * Create position context to superimpose the successor elements border
+   * Known issue: If you use an `a` element as button and an icon inside,
+   * the active state will not work if you click the icon inside the button
+   * Workaround: Just use a `button` or `input` element as button
+   */
+
+  .wex-button-group .wex-button:hover,
+  .wex-button-group .wex-button:active,
+  .wex-button-group .wex-button.wex-active {
+    position: relative;
+  }
+
+}

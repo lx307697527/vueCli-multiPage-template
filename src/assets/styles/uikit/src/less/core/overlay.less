@@ -1,0 +1,534 @@
+// Name:            Overlay
+// Description:     Defines styles for image overlays
+//
+// Component:       `wex-overlay`
+//
+// Sub-objects:     `wex-overlay-panel`
+//                  `wex-overlay-hover`
+//                  `wex-overlay-active`
+//                  `wex-overlay-icon`
+//
+// Modifier:        `wex-overlay-background`
+//                  `wex-overlay-image`
+//                  `wex-overlay-top`
+//                  `wex-overlay-bottom`
+//                  `wex-overlay-left`
+//                  `wex-overlay-right`
+//                  `wex-overlay-fade`
+//                  `wex-overlay-scale`
+//                  `wex-overlay-spin`
+//                  `wex-overlay-grayscale`
+//                  `wex-overlay-slide-top`
+//                  `wex-overlay-slide-bottom`
+//                  `wex-overlay-slide-left`
+//                  `wex-overlay-slide-right`
+//
+// DEPRECATED:      `wex-overlay-area`
+//                  `wex-overlay-area-content`
+//                  `wex-overlay-caption`
+//                  `wex-overlay-toggle`
+//
+// States:          `wex-hover`
+//                  `wex-active`
+//                  `wex-ignore`
+//
+// Uses:            Icon: `[class*='wex-icon-']`
+//                  `wex-border-circle`
+//
+// Markup:
+//
+// <!-- wex-overlay -->
+// <figure class="wex-overlay" href="">
+//     <img src="" alt="">
+//     <figcaption class="wex-overlay-panel"></figcaption>
+// </figure>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@overlay-panel-padding:                         20px;
+@overlay-panel-color:                           #fff;
+
+@overlay-panel-background:                      rgba(0,0,0,0.5);
+
+@overlay-icon:                                  "\f002";
+@overlay-icon-size:                             50px;
+@overlay-icon-color:                            #fff;
+
+@overlay-fade-in-opacity:                       1;
+@overlay-fade-out-opacity:                      0.7;
+
+@overlay-scale-in-scale:                        1.1;
+@overlay-scale-out-scale:                       1;
+
+@overlay-spin-in-scale:                         1.1;
+@overlay-spin-out-scale:                        1;
+@overlay-spin-in-rotate:                        3deg;
+@overlay-spin-out-rotate:                       0deg;
+
+@overlay-panel-link-color:                      inherit;
+@overlay-panel-link-text-decoration:            underline;
+
+// DEPRECATED
+@overlay-area-background:                       rgba(0,0,0,0.3);
+
+@overlay-area-icon:                             "\f002";
+@overlay-area-icon-size:                        50px;
+@overlay-area-icon-color:                       #fff;
+
+@overlay-area-content-font-size:                1rem;
+@overlay-area-content-padding-horizontal:       15px;
+@overlay-area-content-color:                    #fff;
+@overlay-area-content-link-color:               inherit;
+
+@overlay-caption-background:                    rgba(0,0,0,0.5);
+@overlay-caption-padding:                       15px;
+@overlay-caption-color:                         #fff;
+
+
+/* ========================================================================
+   Component: Overlay
+ ========================================================================== */
+
+/*
+ * 1. Container width fits its content
+ * 2. Create position context
+ * 3. Set max-width for responsive images to prevent `inline-block` consequences
+ * 4. Remove the gap between the container and its child element
+ * 5. Needed for transitions and to fixed wrong scaling calculation for images in Chrome
+ * 6. Fixed `overflow: hidden` to be ignored with border-radius and CSS transforms in Webkit
+ * 7. Reset margin
+ */
+
+.wex-overlay {
+    /* 1 */
+    display: inline-block;
+    /* 2 */
+    position: relative;
+    /* 3 */
+    max-width: 100%;
+    /* 4 */
+    vertical-align: middle;
+    /* 5 */
+    overflow: hidden;
+    /* 6 */
+    -webkit-transform: translateZ(0);
+    /* 7 */
+    margin: 0;
+}
+
+/* 6 for Safari */
+.wex-overlay.wex-border-circle { -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%); }
+
+/*
+ * Remove margin from content
+ */
+
+.wex-overlay > :first-child { margin-bottom: 0; }
+
+
+/* Sub-object `wex-overlay-panel`
+ ========================================================================== */
+
+/*
+ * 1. Position cover
+ * 2. Style
+ */
+
+.wex-overlay-panel {
+    /* 1 */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* 2 */
+    padding: @overlay-panel-padding;
+    color: @overlay-panel-color;
+    .hook-overlay-panel;
+}
+
+/*
+ * Remove margin from the last-child
+ */
+
+.wex-overlay-panel > :last-child,
+.wex-overlay-panel.wex-flex > * > :last-child { margin-bottom: 0; }
+
+/*
+ * Keep color for headings if the default heading color is changed
+ */
+
+.wex-overlay-panel h1,
+.wex-overlay-panel h2,
+.wex-overlay-panel h3,
+.wex-overlay-panel h4,
+.wex-overlay-panel h5,
+.wex-overlay-panel h6 { color: inherit; }
+
+.wex-overlay-panel a:not([class]) {
+    color: @overlay-panel-link-color;
+    text-decoration: @overlay-panel-link-text-decoration;
+}
+
+.wex-overlay-panel a[class*='wex-icon-']:not(.wex-icon-button) { color: @overlay-panel-link-color; }
+
+
+/* Sub-object `wex-overlay-hover` and `wex-overlay-active`
+ ========================================================================== */
+
+.wex-overlay-hover:not(:hover):not(.wex-hover) .wex-overlay-panel:not(.wex-ignore) { opacity: 0; }
+
+.wex-overlay-active :not(.wex-active) > .wex-overlay-panel:not(.wex-ignore) { opacity: 0; }
+
+
+/* Modifier `wex-overlay-background`
+ ========================================================================== */
+
+.wex-overlay-background {
+    background: @overlay-panel-background;
+    .hook-overlay-background;
+}
+
+
+/* Modifier `wex-overlay-image`
+ ========================================================================== */
+
+/*
+ * Reset panel
+ */
+
+.wex-overlay-image {
+    padding: 0;
+    .hook-overlay-image;
+}
+
+
+/* Position modifiers
+ ========================================================================== */
+
+.wex-overlay-top { bottom: auto; }
+
+.wex-overlay-bottom { top: auto; }
+
+.wex-overlay-left { right: auto; }
+
+.wex-overlay-right { left: auto; }
+
+
+/* Sub-object `wex-overlay-icon`
+ ========================================================================== */
+
+.wex-overlay-icon:before {
+    content: @overlay-icon;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: @overlay-icon-size;
+    height: @overlay-icon-size;
+    margin-top: -(@overlay-icon-size / 2);
+    margin-left: -(@overlay-icon-size / 2);
+    font-size: @overlay-icon-size;
+    line-height: 1;
+    font-family: FontAwesome;
+    text-align: center;
+    color: @overlay-icon-color;
+    .hook-overlay-icon;
+}
+
+
+/* Transitions
+ ========================================================================== */
+
+.wex-overlay-fade,
+.wex-overlay-scale,
+.wex-overlay-spin,
+.wex-overlay-grayscale,
+.wex-overlay-blur,
+[class*='wex-overlay-slide'] {
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+    transition-property: opacity, transform, filter;
+}
+
+.wex-overlay-active .wex-overlay-fade,
+.wex-overlay-active .wex-overlay-scale,
+.wex-overlay-active .wex-overlay-spin,
+.wex-overlay-active [class*='wex-overlay-slide'] { transition-duration: 0.8s; }
+
+/*
+ * Fade
+ */
+
+.wex-overlay-fade { opacity: @overlay-fade-out-opacity; }
+
+.wex-overlay-hover:hover .wex-overlay-fade,
+.wex-overlay-hover.wex-hover .wex-overlay-fade,
+.wex-overlay-active .wex-active > .wex-overlay-fade { opacity: @overlay-fade-in-opacity; }
+
+/*
+ * Scale
+ */
+
+.wex-overlay-scale {
+    -webkit-transform: scale(@overlay-scale-out-scale);
+    transform: scale(@overlay-scale-out-scale);
+}
+
+.wex-overlay-hover:hover .wex-overlay-scale,
+.wex-overlay-hover.wex-hover .wex-overlay-scale,
+.wex-overlay-active .wex-active > .wex-overlay-scale {
+    -webkit-transform: scale(@overlay-scale-in-scale);
+    transform: scale(@overlay-scale-in-scale);
+}
+
+/*
+ * Spin
+ */
+
+.wex-overlay-spin {
+    -webkit-transform: scale(@overlay-spin-out-scale) rotate(@overlay-spin-out-rotate);
+    transform: scale(@overlay-spin-out-scale) rotate(@overlay-spin-out-rotate);
+}
+
+.wex-overlay-hover:hover .wex-overlay-spin,
+.wex-overlay-hover.wex-hover .wex-overlay-spin,
+.wex-overlay-active .wex-active > .wex-overlay-spin {
+    -webkit-transform: scale(@overlay-spin-in-scale) rotate(@overlay-spin-in-rotate);
+    transform: scale(@overlay-spin-in-scale) rotate(@overlay-spin-in-rotate);
+}
+
+/*
+ * Grayscale
+ */
+
+.wex-overlay-grayscale {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.wex-overlay-hover:hover .wex-overlay-grayscale,
+.wex-overlay-hover.wex-hover .wex-overlay-grayscale,
+.wex-overlay-active .wex-active > .wex-overlay-grayscale {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+/*
+ * Slide
+ */
+
+[class*='wex-overlay-slide'] { opacity: 0; }
+
+/* Top */
+.wex-overlay-slide-top {
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+/* Bottom */
+.wex-overlay-slide-bottom {
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+}
+
+/* Left */
+.wex-overlay-slide-left {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+/* Right */
+.wex-overlay-slide-right {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+/* Hover */
+.wex-overlay-hover:hover [class*='wex-overlay-slide'],
+.wex-overlay-hover.wex-hover [class*='wex-overlay-slide'],
+.wex-overlay-active .wex-active > [class*='wex-overlay-slide'] {
+    opacity: 1;
+    -webkit-transform: translateX(0) translateY(0);
+    transform: translateX(0) translateY(0);
+}
+
+
+/* DEPRECATED
+ * Sub-object `wex-overlay-area`
+ ========================================================================== */
+
+/*
+ * 1. Set position
+ * 2. Set style
+ * 3. Fade-in transition
+ */
+
+.wex-overlay-area {
+    /* 1 */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* 2 */
+    background: @overlay-area-background;
+    /* 3 */
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+    -webkit-transform: translate3d(0,0,0);
+    .hook-overlay-area;
+}
+
+/*
+ * Hover
+ * 1. `wex-hover` to support touch devices
+ * 2. Use optional `wex-overlay-toggle` to trigger the overlay earlier
+ */
+
+.wex-overlay:hover .wex-overlay-area,
+.wex-overlay.wex-hover .wex-overlay-area, // 1
+.wex-overlay-toggle:hover .wex-overlay-area, // 2
+.wex-overlay-toggle.wex-hover .wex-overlay-area { opacity: 1; }
+
+/*
+ * Icon
+ */
+
+.wex-overlay-area:empty:before {
+    content: @overlay-area-icon;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: @overlay-area-icon-size;
+    height: @overlay-area-icon-size;
+    margin-top: -(@overlay-area-icon-size / 2);
+    margin-left: -(@overlay-area-icon-size / 2);
+    font-size: @overlay-area-icon-size;
+    line-height: 1;
+    font-family: FontAwesome;
+    text-align: center;
+    color: @overlay-area-icon-color;
+    .hook-overlay-area-icon;
+}
+
+
+/* DEPRECATED
+ * Sub-object `wex-overlay-area-content`
+ ========================================================================== */
+
+/*
+ * Remove whitespace between child elements when using `inline-block`
+ * Needed for Firefox
+ */
+
+.wex-overlay-area:not(:empty) { font-size: 0.001px; }
+
+/*
+ * 1. Needed for vertical alignment
+ */
+
+.wex-overlay-area:not(:empty):before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+/*
+ * 1. Set vertical alignment
+ * 2. Reset whitespace hack
+ * 3. Set horizontal alignment
+ * 4. Set style
+ */
+
+.wex-overlay-area-content {
+    /* 1 */
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    vertical-align: middle;
+    /* 2 */
+    font-size: @overlay-area-content-font-size;
+    /* 3 */
+    text-align: center;
+    /* 4 */
+    padding: 0 @overlay-area-content-padding-horizontal;
+    color: @overlay-area-content-color;
+    .hook-overlay-area-content;
+}
+
+/*
+ * Remove margin from the last-child
+ */
+
+.wex-overlay-area-content > :last-child { margin-bottom: 0; }
+
+/*
+ * Links in overlay area
+ */
+
+.wex-overlay-area-content a:not([class]),
+.wex-overlay-area-content a:not([class]):hover { color: @overlay-area-content-link-color; }
+
+
+/* DEPRECATED
+ * Sub-object `wex-overlay-caption`
+ ========================================================================== */
+
+/*
+ * 1. Set position
+ * 2. Set style
+ * 3. Fade-in transition
+ */
+
+.wex-overlay-caption {
+    /* 1 */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* 2 */
+    padding: @overlay-caption-padding;
+    background: @overlay-caption-background;
+    color: @overlay-caption-color;
+    /* 3 */
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+    -webkit-transform: translate3d(0,0,0);
+    .hook-overlay-caption;
+}
+
+/*
+ * Hover
+ * 1. `wex-hover` to support touch devices
+ * 2. Use optional `wex-overlay-toggle` to trigger the overlay earlier
+ */
+
+.wex-overlay:hover .wex-overlay-caption,
+.wex-overlay.wex-hover .wex-overlay-caption, // 1
+.wex-overlay-toggle:hover .wex-overlay-caption, // 2
+.wex-overlay-toggle.wex-hover .wex-overlay-caption { opacity: 1; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-overlay-misc;
+
+.hook-overlay-panel() {}
+.hook-overlay-background() {}
+.hook-overlay-image() {}
+.hook-overlay-icon() {}
+.hook-overlay-misc() {}
+
+// DEPRECATED
+.hook-overlay-area() {}
+.hook-overlay-area-icon() {}
+.hook-overlay-area-content() {}
+.hook-overlay-caption() {}

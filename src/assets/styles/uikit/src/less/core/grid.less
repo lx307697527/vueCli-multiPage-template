@@ -1,0 +1,731 @@
+// Name:            Grid
+// Description:     Provides a responsive, fluid and nestable grid
+//
+// Component:       `wex-grid`
+//                  `wex-width-*`
+//                  `wex-push-*`
+//                  `wex-pull-*`
+//
+// Modifiers:       `wex-grid-collapse`
+//                  `wex-grid-small`
+//                  `wex-grid-medium`
+//                  `wex-grid-large`
+//                  `wex-grid-divider`
+//                  `wex-grid-margin`
+//                  `wex-grid-match`
+//                  `wex-grid-width-*`
+//
+// Uses:            Panel: `wex-panel`
+//
+// Used by:         Dropdown
+//
+// Markup:
+//
+// <!-- wex-grid -->
+// <div class="wex-grid">
+//     <div class="wex-width-1-2"></div>
+//     <div class="wex-width-1-2"></div>
+// </div>
+//
+// <!-- wex-grid-divider -->
+// <div class="wex-grid wex-grid-divider">
+//     <div class="wex-width-1-2"></div>
+//     <div class="wex-width-1-2"></div>
+// </div>
+// <hr class="wex-grid-divider">
+// <div class="wex-grid wex-grid-divider">
+//     <div class="wex-width-1-2"></div>
+//     <div class="wex-width-1-2"></div>
+// </div>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@grid-gutter-horizontal:                        25px;
+@grid-gutter-vertical:                          25px;
+
+@grid-gutter-large-horizontal:                  35px;
+@grid-gutter-large-vertical:                    35px;
+
+@grid-gutter-xlarge-horizontal:                 50px;
+@grid-gutter-xlarge-vertical:                   50px;
+
+@grid-gutter-small-horizontal:                  10px;
+@grid-gutter-small-vertical:                    10px;
+
+@grid-divider-border:                           #ddd;
+@grid-divider-border-width:                     1px;
+
+
+/* ========================================================================
+   Component: Grid
+ ========================================================================== */
+
+/*
+ * 1. Makes grid more robust so that it can be used with other block elements like lists
+ */
+
+.wex-grid {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* 1 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * DEPRECATED
+ * Micro clearfix
+ * Can't use `table` because it creates a 1px gap when it becomes a flex item, only in Webkit
+ */
+
+.wex-grid:before,
+.wex-grid:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+}
+
+.wex-grid:after { clear: both; }
+
+/*
+ * Grid cell
+ * 1. Space is allocated solely based on content dimensions
+ * 2. Makes grid more robust so that it can be used with other block elements
+ * 3. DEPRECATED Using `float` to support IE9
+ */
+
+.wex-grid > * {
+    /* 1 */
+    -ms-flex: none;
+    -webkit-flex: none;
+    flex: none;
+    /* 2 */
+    margin: 0;
+    /* 3 */
+    float: left;
+}
+
+/*
+ * Remove margin from the last-child
+ */
+
+.wex-grid > * > :last-child { margin-bottom: 0; }
+
+
+/* Grid gutter
+ ========================================================================== */
+
+/*
+ * Default gutter
+ */
+
+/* Horizontal */
+.wex-grid { margin-left: -@grid-gutter-horizontal; }
+.wex-grid > * { padding-left: @grid-gutter-horizontal; }
+
+/* Vertical */
+.wex-grid + .wex-grid,
+.wex-grid-margin,
+.wex-grid > * > .wex-panel + .wex-panel { margin-top: @grid-gutter-vertical; }
+
+/* Large screen and bigger */
+//@media (min-width: @breakpoint-xlarge) {
+//
+//    /* Horizontal */
+//    .wex-grid { margin-left: -@grid-gutter-large-horizontal; }
+//    .wex-grid > * { padding-left: @grid-gutter-large-horizontal; }
+//
+//    /* Vertical */
+//    .wex-grid + .wex-grid,
+//    .wex-grid-margin,
+//    .wex-grid > * > .wex-panel + .wex-panel { margin-top: @grid-gutter-large-vertical; }
+//
+//}
+
+/*
+ * Collapse gutter
+ */
+
+/* Horizontal */
+.wex-grid-collapse { margin-left: 0; }
+.wex-grid-collapse > * { padding-left: 0; }
+
+/* Vertical */
+.wex-grid-collapse + .wex-grid-collapse,
+.wex-grid-collapse > .wex-grid-margin,
+.wex-grid-collapse > * > .wex-panel + .wex-panel { margin-top: 0; }
+
+/*
+ * Small gutter
+ */
+
+/* Horizontal */
+.wex-grid-small { margin-left: -@grid-gutter-small-horizontal; }
+.wex-grid-small > * { padding-left: @grid-gutter-small-horizontal; }
+
+/* Vertical */
+.wex-grid-small + .wex-grid-small,
+.wex-grid-small > .wex-grid-margin,
+.wex-grid-small > * > .wex-panel + .wex-panel { margin-top: @grid-gutter-small-vertical; }
+
+/*
+ * Medium gutter
+ */
+
+/* Horizontal */
+.wex-grid-medium { margin-left: -@grid-gutter-horizontal; }
+.wex-grid-medium > * { padding-left: @grid-gutter-horizontal; }
+
+/* Vertical */
+.wex-grid-medium + .wex-grid-medium,
+.wex-grid-medium > .wex-grid-margin,
+.wex-grid-medium > * > .wex-panel + .wex-panel { margin-top: @grid-gutter-vertical; }
+
+
+/*
+ * Large gutter
+ */
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-large) {
+
+    /* Horizontal */
+    .wex-grid-large { margin-left: -@grid-gutter-large-horizontal; }
+    .wex-grid-large > * { padding-left: @grid-gutter-large-horizontal; }
+
+    /* Vertical */
+    .wex-grid-large + .wex-grid-large,
+    .wex-grid-large-margin,
+    .wex-grid-large > * > .wex-panel + .wex-panel { margin-top: @grid-gutter-large-vertical; }
+
+}
+
+/* Extra Large screens */
+@media (min-width: @breakpoint-xlarge) {
+
+    /* Horizontal */
+    .wex-grid-large { margin-left: -@grid-gutter-xlarge-horizontal; }
+    .wex-grid-large > * { padding-left: @grid-gutter-xlarge-horizontal; }
+
+    /* Vertical */
+    .wex-grid-large + .wex-grid-large,
+    .wex-grid-large-margin,
+    .wex-grid-large > * > .wex-panel + .wex-panel { margin-top: @grid-gutter-xlarge-vertical; }
+
+}
+
+
+/* Modifier: `wex-grid-divider`
+ ========================================================================== */
+
+/*
+ * Horizontal divider
+ * Only works with the default gutter. Does not work with gutter collapse, small or large.
+ * Does not work with `wex-push-*`, `wex-pull-*` and not if the columns float into the next row.
+ */
+
+.wex-grid-divider:not(:empty) {
+    margin-left: -@grid-gutter-horizontal;
+    margin-right: -@grid-gutter-horizontal;
+}
+
+.wex-grid-divider > * {
+    padding-left: @grid-gutter-horizontal;
+    padding-right: @grid-gutter-horizontal;
+}
+
+.wex-grid-divider > [class*='wex-width-1-']:not(.wex-width-1-1):nth-child(n+2),
+.wex-grid-divider > [class*='wex-width-2-']:nth-child(n+2),
+.wex-grid-divider > [class*='wex-width-3-']:nth-child(n+2),
+.wex-grid-divider > [class*='wex-width-4-']:nth-child(n+2),
+.wex-grid-divider > [class*='wex-width-5-']:nth-child(n+2),
+.wex-grid-divider > [class*='wex-width-6-']:nth-child(n+2),
+.wex-grid-divider > [class*='wex-width-7-']:nth-child(n+2),
+.wex-grid-divider > [class*='wex-width-8-']:nth-child(n+2),
+.wex-grid-divider > [class*='wex-width-9-']:nth-child(n+2) { border-left: @grid-divider-border-width solid @grid-divider-border; }
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .wex-grid-divider > [class*='wex-width-medium-']:not(.wex-width-medium-1-1):nth-child(n+2) { border-left: @grid-divider-border-width solid @grid-divider-border; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+    .wex-grid-divider > [class*='wex-width-large-']:not(.wex-width-large-1-1):nth-child(n+2) { border-left: @grid-divider-border-width solid @grid-divider-border; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+    /*
+     * Large gutter
+     */
+
+    .wex-grid-divider:not(:empty) {
+        margin-left: -@grid-gutter-large-horizontal;
+        margin-right: -@grid-gutter-large-horizontal;
+    }
+
+    .wex-grid-divider > * {
+        padding-left: @grid-gutter-large-horizontal;
+        padding-right: @grid-gutter-large-horizontal;
+    }
+
+    .wex-grid-divider:empty {
+        margin-top: @grid-gutter-large-vertical;
+        margin-bottom: @grid-gutter-large-vertical;
+    }
+
+}
+
+/*
+ * Vertical divider
+ */
+
+.wex-grid-divider:empty {
+    margin-top: @grid-gutter-vertical;
+    margin-bottom: @grid-gutter-vertical;
+    border-top: @grid-divider-border-width solid @grid-divider-border;
+}
+
+/* Match panels in grids
+ ========================================================================== */
+
+/*
+ * 1. Behave like a block element
+ */
+
+.wex-grid-match > * {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* 1 */
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.wex-grid-match > * > * {
+    /* 1 */
+    -ms-flex: none;
+    -webkit-flex: none;
+    flex: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+/* Even grid cell widths
+ ========================================================================== */
+
+[class*='wex-grid-width'] > * {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.wex-grid-width-1-2 > * { width: 50%; }
+.wex-grid-width-1-3 > * { width: 33.333%; }
+.wex-grid-width-1-4 > * { width: 25%; }
+.wex-grid-width-1-5 > * { width: 20%; }
+.wex-grid-width-1-6 > * { width: 16.666%; }
+.wex-grid-width-1-10 > * { width: 10%; }
+
+.wex-grid-width-auto > * { width: auto; }
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-small) {
+
+    .wex-grid-width-small-1-1 > * { width: 100%; }
+    .wex-grid-width-small-1-2 > * { width: 50%; }
+    .wex-grid-width-small-1-3 > * { width: 33.333%; }
+    .wex-grid-width-small-1-4 > * { width: 25%; }
+    .wex-grid-width-small-1-5 > * { width: 20%; }
+    .wex-grid-width-small-1-6 > * { width: 16.666%; }
+    .wex-grid-width-small-1-10 > * { width: 10%; }
+
+}
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .wex-grid-width-medium-1-1 > * { width: 100%; }
+    .wex-grid-width-medium-1-2 > * { width: 50%; }
+    .wex-grid-width-medium-1-3 > * { width: 33.333%; }
+    .wex-grid-width-medium-1-4 > * { width: 25%; }
+    .wex-grid-width-medium-1-5 > * { width: 20%; }
+    .wex-grid-width-medium-1-6 > * { width: 16.666%; }
+    .wex-grid-width-medium-1-10 > * { width: 10%; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+    .wex-grid-width-large-1-1 > * { width: 100%; }
+    .wex-grid-width-large-1-2 > * { width: 50%; }
+    .wex-grid-width-large-1-3 > * { width: 33.333%; }
+    .wex-grid-width-large-1-4 > * { width: 25%; }
+    .wex-grid-width-large-1-5 > * { width: 20%; }
+    .wex-grid-width-large-1-6 > * { width: 16.666%; }
+    .wex-grid-width-large-1-10 > * { width: 10%; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+    .wex-grid-width-xlarge-1-1 > * { width: 100%; }
+    .wex-grid-width-xlarge-1-2 > * { width: 50%; }
+    .wex-grid-width-xlarge-1-3 > * { width: 33.333%; }
+    .wex-grid-width-xlarge-1-4 > * { width: 25%; }
+    .wex-grid-width-xlarge-1-5 > * { width: 20%; }
+    .wex-grid-width-xlarge-1-6 > * { width: 16.666%; }
+    .wex-grid-width-xlarge-1-10 > * { width: 10%; }
+
+}
+
+
+/* Sub-objects: `wex-width-*`
+ ========================================================================== */
+
+[class*='wex-width'] {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/*
+ * Widths
+ */
+
+/* Whole */
+.wex-width-1-1 { width: 100%; }
+
+/* Halves */
+.wex-width-1-2,
+.wex-width-2-4,
+.wex-width-3-6,
+.wex-width-5-10 { width: 50%; }
+
+/* Thirds */
+.wex-width-1-3,
+.wex-width-2-6 { width: 33.333%; }
+.wex-width-2-3,
+.wex-width-4-6 { width: 66.666%; }
+
+/* Quarters */
+.wex-width-1-4 { width: 25%; }
+.wex-width-3-4 { width: 75%; }
+
+/* Fifths */
+.wex-width-1-5,
+.wex-width-2-10 { width: 20%; }
+.wex-width-2-5,
+.wex-width-4-10 { width: 40%; }
+.wex-width-3-5,
+.wex-width-6-10 { width: 60%; }
+.wex-width-4-5,
+.wex-width-8-10 { width: 80%; }
+
+/* Sixths */
+.wex-width-1-6 { width: 16.666%; }
+.wex-width-5-6 { width: 83.333%; }
+
+/* Tenths */
+.wex-width-1-10 { width: 10%; }
+.wex-width-3-10 { width: 30%; }
+.wex-width-7-10 { width: 70%; }
+.wex-width-9-10 { width: 90%; }
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-small) {
+
+    /* Whole */
+    .wex-width-small-1-1 { width: 100%; }
+
+    /* Halves */
+    .wex-width-small-1-2,
+    .wex-width-small-2-4,
+    .wex-width-small-3-6,
+    .wex-width-small-5-10 { width: 50%; }
+
+    /* Thirds */
+    .wex-width-small-1-3,
+    .wex-width-small-2-6 { width: 33.333%; }
+    .wex-width-small-2-3,
+    .wex-width-small-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .wex-width-small-1-4 { width: 25%; }
+    .wex-width-small-3-4 { width: 75%; }
+
+    /* Fifths */
+    .wex-width-small-1-5,
+    .wex-width-small-2-10 { width: 20%; }
+    .wex-width-small-2-5,
+    .wex-width-small-4-10 { width: 40%; }
+    .wex-width-small-3-5,
+    .wex-width-small-6-10 { width: 60%; }
+    .wex-width-small-4-5,
+    .wex-width-small-8-10 { width: 80%; }
+
+    /* Sixths */
+    .wex-width-small-1-6 { width: 16.666%; }
+    .wex-width-small-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .wex-width-small-1-10 { width: 10%; }
+    .wex-width-small-3-10 { width: 30%; }
+    .wex-width-small-7-10 { width: 70%; }
+    .wex-width-small-9-10 { width: 90%; }
+
+}
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    /* Whole */
+    .wex-width-medium-1-1 { width: 100%; }
+
+    /* Halves */
+    .wex-width-medium-1-2,
+    .wex-width-medium-2-4,
+    .wex-width-medium-3-6,
+    .wex-width-medium-5-10 { width: 50%; }
+
+    /* Thirds */
+    .wex-width-medium-1-3,
+    .wex-width-medium-2-6 { width: 33.333%; }
+    .wex-width-medium-2-3,
+    .wex-width-medium-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .wex-width-medium-1-4 { width: 25%; }
+    .wex-width-medium-3-4 { width: 75%; }
+
+    /* Fifths */
+    .wex-width-medium-1-5,
+    .wex-width-medium-2-10 { width: 20%; }
+    .wex-width-medium-2-5,
+    .wex-width-medium-4-10 { width: 40%; }
+    .wex-width-medium-3-5,
+    .wex-width-medium-6-10 { width: 60%; }
+    .wex-width-medium-4-5,
+    .wex-width-medium-8-10 { width: 80%; }
+
+    /* Sixths */
+    .wex-width-medium-1-6 { width: 16.666%; }
+    .wex-width-medium-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .wex-width-medium-1-10 { width: 10%; }
+    .wex-width-medium-3-10 { width: 30%; }
+    .wex-width-medium-7-10 { width: 70%; }
+    .wex-width-medium-9-10 { width: 90%; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+    /* Whole */
+    .wex-width-large-1-1 { width: 100%; }
+
+    /* Halves */
+    .wex-width-large-1-2,
+    .wex-width-large-2-4,
+    .wex-width-large-3-6,
+    .wex-width-large-5-10 { width: 50%; }
+
+    /* Thirds */
+    .wex-width-large-1-3,
+    .wex-width-large-2-6 { width: 33.333%; }
+    .wex-width-large-2-3,
+    .wex-width-large-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .wex-width-large-1-4 { width: 25%; }
+    .wex-width-large-3-4 { width: 75%; }
+
+    /* Fifths */
+    .wex-width-large-1-5,
+    .wex-width-large-2-10 { width: 20%; }
+    .wex-width-large-2-5,
+    .wex-width-large-4-10 { width: 40%; }
+    .wex-width-large-3-5,
+    .wex-width-large-6-10 { width: 60%; }
+    .wex-width-large-4-5,
+    .wex-width-large-8-10 { width: 80%; }
+
+    /* Sixths */
+    .wex-width-large-1-6 { width: 16.666%; }
+    .wex-width-large-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .wex-width-large-1-10 { width: 10%; }
+    .wex-width-large-3-10 { width: 30%; }
+    .wex-width-large-7-10 { width: 70%; }
+    .wex-width-large-9-10 { width: 90%; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+    /* Whole */
+    .wex-width-xlarge-1-1 { width: 100%; }
+
+    /* Halves */
+    .wex-width-xlarge-1-2,
+    .wex-width-xlarge-2-4,
+    .wex-width-xlarge-3-6,
+    .wex-width-xlarge-5-10 { width: 50%; }
+
+    /* Thirds */
+    .wex-width-xlarge-1-3,
+    .wex-width-xlarge-2-6 { width: 33.333%; }
+    .wex-width-xlarge-2-3,
+    .wex-width-xlarge-4-6 { width: 66.666%; }
+
+    /* Quarters */
+    .wex-width-xlarge-1-4 { width: 25%; }
+    .wex-width-xlarge-3-4 { width: 75%; }
+
+    /* Fifths */
+    .wex-width-xlarge-1-5,
+    .wex-width-xlarge-2-10 { width: 20%; }
+    .wex-width-xlarge-2-5,
+    .wex-width-xlarge-4-10 { width: 40%; }
+    .wex-width-xlarge-3-5,
+    .wex-width-xlarge-6-10 { width: 60%; }
+    .wex-width-xlarge-4-5,
+    .wex-width-xlarge-8-10 { width: 80%; }
+
+    /* Sixths */
+    .wex-width-xlarge-1-6 { width: 16.666%; }
+    .wex-width-xlarge-5-6 { width: 83.333%; }
+
+    /* Tenths */
+    .wex-width-xlarge-1-10 { width: 10%; }
+    .wex-width-xlarge-3-10 { width: 30%; }
+    .wex-width-xlarge-7-10 { width: 70%; }
+    .wex-width-xlarge-9-10 { width: 90%; }
+
+}
+
+
+/* Sub-object: `wex-push-*` and `wex-pull-*`
+ ========================================================================== */
+
+/*
+ * Source ordering
+ * Works only with `wex-width-medium-*`
+ */
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    [class*='wex-push-'],
+    [class*='wex-pull-'] { position: relative; }
+
+    /*
+     * Push
+     */
+
+    /* Halves */
+    .wex-push-1-2,
+    .wex-push-2-4,
+    .wex-push-3-6,
+    .wex-push-5-10 { left: 50%; }
+
+    /* Thirds */
+    .wex-push-1-3,
+    .wex-push-2-6 { left: 33.333%; }
+    .wex-push-2-3,
+    .wex-push-4-6 { left: 66.666%; }
+
+    /* Quarters */
+    .wex-push-1-4 { left: 25%; }
+    .wex-push-3-4 { left: 75%; }
+
+    /* Fifths */
+    .wex-push-1-5,
+    .wex-push-2-10 { left: 20%; }
+    .wex-push-2-5,
+    .wex-push-4-10 { left: 40%; }
+    .wex-push-3-5,
+    .wex-push-6-10 { left: 60%; }
+    .wex-push-4-5,
+    .wex-push-8-10 { left: 80%; }
+
+    /* Sixths */
+    .wex-push-1-6 { left: 16.666%; }
+    .wex-push-5-6 { left: 83.333%; }
+
+    /* Tenths */
+    .wex-push-1-10 { left: 10%; }
+    .wex-push-3-10 { left: 30%; }
+    .wex-push-7-10 { left: 70%; }
+    .wex-push-9-10 { left: 90%; }
+
+    /*
+     * Pull
+     */
+
+     /* Halves */
+     .wex-pull-1-2,
+     .wex-pull-2-4,
+     .wex-pull-3-6,
+     .wex-pull-5-10 { left: -50%; }
+
+     /* Thirds */
+     .wex-pull-1-3,
+     .wex-pull-2-6 { left: -33.333%; }
+     .wex-pull-2-3,
+     .wex-pull-4-6 { left: -66.666%; }
+
+     /* Quarters */
+     .wex-pull-1-4 { left: -25%; }
+     .wex-pull-3-4 { left: -75%; }
+
+     /* Fifths */
+     .wex-pull-1-5,
+     .wex-pull-2-10 { left: -20%; }
+     .wex-pull-2-5,
+     .wex-pull-4-10 { left: -40%; }
+     .wex-pull-3-5,
+     .wex-pull-6-10 { left: -60%; }
+     .wex-pull-4-5,
+     .wex-pull-8-10 { left: -80%; }
+
+     /* Sixths */
+     .wex-pull-1-6 { left: -16.666%; }
+     .wex-pull-5-6 { left: -83.333%; }
+
+     /* Tenths */
+     .wex-pull-1-10 { left: -10%; }
+     .wex-pull-3-10 { left: -30%; }
+     .wex-pull-7-10 { left: -70%; }
+     .wex-pull-9-10 { left: -90%; }
+
+}
+
+
+// Hooks
+// ========================================================================
+
+.hook-grid-misc;
+
+.hook-grid-misc() {}

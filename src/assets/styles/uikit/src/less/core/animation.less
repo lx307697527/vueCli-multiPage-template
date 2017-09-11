@@ -1,0 +1,609 @@
+// Name:            Animation
+// Description:     Provides a useful set of keyframe animations
+//
+// Component:       `wex-animation-*`
+//
+// Modifiers:       `wex-animation-fade`
+//                  `wex-animation-scale-up`
+//                  `wex-animation-scale-down`
+//                  `wex-animation-slide-top`
+//                  `wex-animation-slide-bottom`
+//                  `wex-animation-slide-left`
+//                  `wex-animation-slide-right`
+//                  `wex-animation-scale`
+//                  `wex-animation-shake`
+//                  `wex-animation-reverse`
+//                  `wex-animation-15`
+//                  `wex-animation-top-left`
+//                  `wex-animation-top-center`
+//                  `wex-animation-top-right`
+//                  `wex-animation-middle-left`
+//                  `wex-animation-middle-right`
+//                  `wex-animation-bottom-left`
+//                  `wex-animation-bottom-center`
+//                  `wex-animation-bottom-right`
+//
+// Sub-objects:     `wex-animation-hover`
+//
+// Uses:            Scrollspy
+//
+// Used by:         Dropdown
+//                  Icon
+//                  Search
+//                  Datepicker
+//                  Slideshow
+//
+// ========================================================================
+
+
+/* ========================================================================
+   Component: Animation
+ ========================================================================== */
+
+[class*='wex-animation-'] {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+/* Hide animated element if scrollspy is used */
+@media screen {
+
+    [data-wex-scrollspy*='wex-animation-']:not([data-wex-scrollspy*='target']) { opacity: 0; }
+
+}
+
+/*
+ * Fade
+ * Higher specificity (!important) needed because of reverse modifier
+ */
+
+.wex-animation-fade {
+    -webkit-animation-name: wex-fade;
+    animation-name: wex-fade;
+    -webkit-animation-duration: 0.8s;
+    animation-duration: 0.8s;
+    -webkit-animation-timing-function: linear !important;
+    animation-timing-function: linear !important;
+}
+
+/*
+ * Fade with scale
+ */
+
+.wex-animation-scale-up {
+    -webkit-animation-name: wex-fade-scale-02;
+    animation-name: wex-fade-scale-02;
+}
+
+.wex-animation-scale-down {
+    -webkit-animation-name: wex-fade-scale-18;
+    animation-name: wex-fade-scale-18;
+}
+
+/*
+ * Fade with slide
+ */
+
+.wex-animation-slide-top {
+    -webkit-animation-name: wex-fade-top;
+    animation-name: wex-fade-top;
+    
+}
+
+.wex-animation-slide-bottom {
+    -webkit-animation-name: wex-fade-bottom;
+    animation-name: wex-fade-bottom;
+}
+
+.wex-animation-slide-left {
+    -webkit-animation-name: wex-fade-left;
+    animation-name: wex-fade-left;
+}
+
+.wex-animation-slide-right {
+    -webkit-animation-name: wex-fade-right;
+    animation-name: wex-fade-right;
+}
+
+/*
+ * Scale
+ */
+
+.wex-animation-scale {
+    -webkit-animation-name: wex-scale-12;
+    animation-name: wex-scale-12;
+}
+
+/*
+ * Shake
+ */
+
+.wex-animation-shake {
+    -webkit-animation-name: wex-shake;
+    animation-name: wex-shake;
+}
+
+
+/* Direction modifiers
+ ========================================================================== */
+
+.wex-animation-reverse {
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+}
+
+
+/* Duration modifiers
+========================================================================== */
+
+.wex-animation-15 {
+    -webkit-animation-duration: 15s;
+    animation-duration: 15s;
+}
+
+
+/* Origin modifiers
+========================================================================== */
+
+.wex-animation-top-left {
+     -webkit-transform-origin: 0 0;
+     transform-origin: 0 0;
+}
+
+.wex-animation-top-center {
+     -webkit-transform-origin: 50% 0;
+     transform-origin: 50% 0;
+}
+
+.wex-animation-top-right {
+     -webkit-transform-origin: 100% 0;
+     transform-origin: 100% 0;
+}
+
+.wex-animation-middle-left {
+     -webkit-transform-origin: 0 50%;
+     transform-origin: 0 50%;
+}
+
+.wex-animation-middle-right {
+     -webkit-transform-origin: 100% 50%;
+     transform-origin: 100% 50%;
+}
+
+.wex-animation-bottom-left {
+     -webkit-transform-origin: 0 100%;
+     transform-origin: 0 100%;
+}
+
+.wex-animation-bottom-center {
+     -webkit-transform-origin: 50% 100%;
+     transform-origin: 50% 100%;
+}
+
+.wex-animation-bottom-right {
+     -webkit-transform-origin: 100% 100%;
+     transform-origin: 100% 100%;
+}
+
+
+/* Sub-object: `wex-animation-hover`
+========================================================================== */
+
+/*
+ * Enable animation only on hover
+ * Note: Firefox also needs this because animations are not triggered when switching between display `hidden` and `block`
+ */
+
+.wex-animation-hover:not(:hover),
+.wex-animation-hover:not(:hover) [class*='wex-animation-'],
+.wex-touch .wex-animation-hover:not(.wex-hover),
+.wex-touch .wex-animation-hover:not(.wex-hover) [class*='wex-animation-'] {
+    -webkit-animation-name: none;
+    animation-name: none;
+}
+
+
+/* Keyframes: Fade
+ * Used by dropdown, datepicker and slideshow component
+ ========================================================================== */
+
+@-webkit-keyframes wex-fade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes wex-fade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+/* Keyframes: Fade with slide
+ ========================================================================== */
+
+/*
+ * Top
+ */
+
+@-webkit-keyframes wex-fade-top {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes wex-fade-top {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+ * Bottom
+ */
+
+@-webkit-keyframes wex-fade-bottom {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes wex-fade-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+ * Left
+ */
+
+@-webkit-keyframes wex-fade-left {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@keyframes wex-fade-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/*
+ * Right
+ */
+
+@-webkit-keyframes wex-fade-right {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@keyframes wex-fade-right {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* Keyframes: Fade with scale
+ ========================================================================== */
+
+/*
+ * Scale by 0.2
+ */
+
+@-webkit-keyframes wex-fade-scale-02 {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.2);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes wex-fade-scale-02 {
+    0% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/*
+ * Scale by 1.5
+ * Used by slideshow component
+ */
+
+@-webkit-keyframes wex-fade-scale-15 {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(1.5);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes wex-fade-scale-15 {
+    0% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/*
+ * Scale by 1.8
+ */
+
+@-webkit-keyframes wex-fade-scale-18 {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(1.8);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes wex-fade-scale-18 {
+    0% {
+        opacity: 0;
+        transform: scale(1.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Keyframes: Slide
+ * Used by slideshow component
+ ========================================================================== */
+
+/*
+ * Left
+ */
+
+@-webkit-keyframes wex-slide-left {
+    0% { -webkit-transform: translateX(-100%); }
+    100% { -webkit-transform: translateX(0); }
+}
+
+@keyframes wex-slide-left {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+}
+
+/*
+ * Right
+ */
+
+@-webkit-keyframes wex-slide-right {
+    0% { -webkit-transform: translateX(100%); }
+    100% { -webkit-transform: translateX(0); }
+}
+
+@keyframes wex-slide-right {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}
+
+/*
+ * Left third
+ */
+
+@-webkit-keyframes wex-slide-left-33 {
+    0% { -webkit-transform: translateX(33%); }
+    100% { -webkit-transform: translateX(0); }
+}
+
+@keyframes wex-slide-left-33 {
+    0% { transform: translateX(33%); }
+    100% { transform: translateX(0); }
+}
+
+/*
+ * Right third
+ */
+
+@-webkit-keyframes wex-slide-right-33 {
+    0% { -webkit-transform: translateX(-33%); }
+    100% { -webkit-transform: translateX(0); }
+}
+
+@keyframes wex-slide-right-33 {
+    0% { transform: translateX(-33%); }
+    100% { transform: translateX(0); }
+}
+
+
+/* Keyframes: Scale
+ ========================================================================== */
+
+@-webkit-keyframes wex-scale-12 {
+    0% { -webkit-transform: scale(1.2); }
+    100% { -webkit-transform: scale(1); }
+}
+
+@keyframes wex-scale-12 {
+    0% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+
+/* Keyframes: Rotate
+ * Used by icon component
+ ========================================================================== */
+
+@-webkit-keyframes wex-rotate {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(359deg); }
+}
+
+@keyframes wex-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(359deg); }
+}
+
+
+/* Keyframes: Shake
+ ========================================================================== */
+
+@-webkit-keyframes wex-shake {
+    0%, 100% { -webkit-transform: translateX(0); }
+    10% { -webkit-transform: translateX(-9px); }
+    20% { -webkit-transform: translateX(8px); }
+    30% { -webkit-transform: translateX(-7px); }
+    40% { -webkit-transform: translateX(6px); }
+    50% { -webkit-transform: translateX(-5px); }
+    60% { -webkit-transform: translateX(4px); }
+    70% { -webkit-transform: translateX(-3px); }
+    80% { -webkit-transform: translateX(2px); }
+    90% { -webkit-transform: translateX(-1px); }
+}
+
+@keyframes wex-shake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-9px); }
+    20% { transform: translateX(8px); }
+    30% { transform: translateX(-7px); }
+    40% { transform: translateX(6px); }
+    50% { transform: translateX(-5px); }
+    60% { transform: translateX(4px); }
+    70% { transform: translateX(-3px); }
+    80% { transform: translateX(2px); }
+    90% { transform: translateX(-1px); }
+}
+
+
+/* Keyframes: Fade with slide fixed
+ * Used by dropdown and search component
+ ========================================================================== */
+
+/*
+ * Top fixed
+ */
+
+@-webkit-keyframes wex-slide-top-fixed {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes wex-slide-top-fixed {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*
+ * Bottom fixed
+ */
+
+@-webkit-keyframes wex-slide-bottom-fixed {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes wex-slide-bottom-fixed {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+ @-webkit-keyframes nprogress-spinner {
+        0%   { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes nprogress-spinner {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Hooks
+// ========================================================================
+
+.hook-animation-misc;
+
+.hook-animation-misc() {}

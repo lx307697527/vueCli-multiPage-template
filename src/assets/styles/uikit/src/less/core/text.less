@@ -1,0 +1,136 @@
+// Name:            Text
+// Description:     Collection of useful text utility classes to style your content
+//
+// Component:       `wex-text-*`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@text-small-font-size:                          11px;
+@text-small-line-height:                        16px;
+@text-large-font-size:                          18px;
+@text-large-line-height:                        24px;
+@text-large-font-weight:                        normal;
+
+@text-muted-color:                              #999;
+@text-primary-color:                            #2d7091;
+@text-success-color:                            #659f13;
+@text-warning-color:                            #e28327;
+@text-danger-color:                             #d85030;
+@text-contrast-color:                           #fff;
+
+
+/* ========================================================================
+   Component: Text
+ ========================================================================== */
+
+/* Size modifiers
+ ========================================================================== */
+
+.wex-text-small {
+    font-size: @text-small-font-size;
+    line-height: @text-small-line-height;
+}
+
+.wex-text-large {
+    font-size: @text-large-font-size;
+    line-height: @text-large-line-height;
+    font-weight: @text-large-font-weight;
+}
+
+
+/* Weight modifiers
+ ========================================================================== */
+
+.wex-text-bold { font-weight: bold; }
+
+
+/* Color modifiers
+ ========================================================================== */
+
+.wex-text-muted { color: @text-muted-color !important; }
+.wex-text-primary { color: @text-primary-color !important; }
+.wex-text-success { color: @text-success-color !important; }
+.wex-text-warning { color: @text-warning-color !important; }
+.wex-text-danger { color: @text-danger-color !important; }
+.wex-text-contrast { color: @text-contrast-color !important; }
+
+
+/* Alignment modifiers
+ ========================================================================== */
+
+.wex-text-left { text-align: left !important; }
+.wex-text-right { text-align: right !important; }
+.wex-text-center { text-align: center !important; }
+.wex-text-justify { text-align: justify !important; }
+
+.wex-text-top { vertical-align: top !important; }
+.wex-text-middle { vertical-align: middle !important; }
+.wex-text-bottom { vertical-align: bottom !important; }
+
+/* Only tablets portrait and smaller */
+@media (max-width: @breakpoint-medium-max) {
+
+    .wex-text-center-medium { text-align: center !important; }
+    .wex-text-left-medium { text-align: left !important; }
+
+}
+
+/* Phone landscape and smaller */
+@media (max-width: @breakpoint-small-max) {
+
+    .wex-text-center-small { text-align: center !important; }
+    .wex-text-left-small { text-align: left !important; }
+
+}
+
+
+/* Wrap modifiers
+ ========================================================================== */
+
+/*
+ * Prevent text from wrapping onto multiple lines
+ */
+
+.wex-text-nowrap { white-space: nowrap; }
+
+/*
+ * Prevent text from wrapping onto multiple lines, and truncate with an ellipsis
+ */
+
+.wex-text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/*
+ * Break strings if their length exceeds the width of their container
+ */
+
+.wex-text-break {
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+
+/* Transform modifiers
+ ========================================================================== */
+
+.wex-text-capitalize { text-transform: capitalize !important; }
+.wex-text-lowercase { text-transform: lowercase !important; }
+.wex-text-uppercase { text-transform: uppercase !important; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-text-misc;
+
+.hook-text-misc() {}

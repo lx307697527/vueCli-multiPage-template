@@ -1,0 +1,325 @@
+// Name:            Navbar
+// Description:     Defines styles for the navigation bar
+//
+// Component:       `wex-navbar`
+//
+// Sub-objects:     `wex-navbar-nav`
+//                  `wex-navbar-nav-subtitle`
+//                  `wex-navbar-content`
+//                  `wex-navbar-brand`
+//                  `wex-navbar-toggle`
+//                  `wex-navbar-toggle-alt`
+//                  `wex-navbar-center`
+//                  `wex-navbar-flip`
+//
+// Modifiers:       `wex-navbar-attached`
+//
+// States:          `wex-active`
+//                  `wex-parent`
+//                  `wex-open`
+//
+// Used by:         Dropdown
+//
+// Markup:
+//
+// <!-- wex-navbar -->
+// <nav class="wex-navbar">
+//     <ul class="wex-navbar-nav">
+//         <li class="wex-active"><a href=""></a></li>
+//         <li><a href=""></a></li>
+//     </ul>
+// </nav>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@navbar-background:                             #eee;
+@navbar-color:                                  #444;
+@navbar-link-color:                             #07D;
+@navbar-link-hover-color:                       #059;
+
+@navbar-nav-height:                             40px;
+@navbar-nav-line-height:                        @navbar-nav-height;
+@navbar-nav-padding-horizontal:                 15px;
+@navbar-nav-color:                              #444;
+@navbar-nav-font-size:                          14px;
+@navbar-nav-font-weight:                        normal;
+@navbar-nav-font-family:                        "Helvetica Neue", Helvetica, Arial, sans-serif;
+@navbar-nav-hover-background:                   #f5f5f5;
+@navbar-nav-hover-color:                        #444;
+@navbar-nav-onclick-background:                 #ddd;
+@navbar-nav-onclick-color:                      #444;
+@navbar-nav-active-background:                  #f5f5f5;
+@navbar-nav-active-color:                       #444;
+@navbar-nav-subtitle-font-size:                 10px;
+@navbar-nav-subtitle-offset:                    2px;
+
+@navbar-brand-font-size:                        18px;
+@navbar-brand-color:                            #444;
+@navbar-brand-hover-color:                      #444;
+
+@navbar-toggle-font-size:                       18px;
+@navbar-toggle-color:                           #444;
+@navbar-toggle-hover-color:                     #444;
+@navbar-toggle-icon:                            "\f0c9";
+@navbar-toggle-icon-alt:                        "\f002";
+
+
+/* ========================================================================
+   Component: Navbar
+ ========================================================================== */
+
+.wex-navbar {
+    background: @navbar-background;
+    color: @navbar-color;
+    .hook-navbar;
+}
+
+/*
+ * Micro clearfix
+ */
+
+.wex-navbar:before,
+.wex-navbar:after {
+    content: "";
+    display: table;
+}
+
+.wex-navbar:after { clear: both; }
+
+
+/* Sub-object: `wex-navbar-nav`
+ ========================================================================== */
+
+.wex-navbar-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+}
+
+/*
+ * 1. Create position context for dropdowns
+ */
+
+.wex-navbar-nav > li {
+    float: left;
+    /* 1 */
+    position: relative;
+}
+
+/*
+ * 1. Dimensions
+ * 2. Style
+ */
+
+.wex-navbar-nav > li > a {
+    display: block;
+    box-sizing: border-box;
+    text-decoration: none;
+    /* 1 */
+    height: @navbar-nav-height;
+    padding: 0 @navbar-nav-padding-horizontal;
+    line-height: @navbar-nav-line-height;
+    /* 2 */
+    color: @navbar-nav-color;
+    font-size: @navbar-nav-font-size;
+    font-family: @navbar-nav-font-family;
+    font-weight: @navbar-nav-font-weight;
+    .hook-navbar-nav;
+}
+
+/* Appear not as link */
+.wex-navbar-nav > li > a[href='#'] { cursor: text; }
+
+/*
+ * Hover
+ * 1. Apply hover style also to focus state
+ * 2. Also apply if dropdown is opened
+ * 3. Remove default focus style
+ */
+
+.wex-navbar-nav > li:hover > a,
+.wex-navbar-nav > li > a:focus, // 1
+.wex-navbar-nav > li.wex-open > a { // 2
+    background-color: @navbar-nav-hover-background;
+    color: @navbar-nav-hover-color;
+    /* 3 */
+    outline: none;
+    .hook-navbar-nav-hover;
+}
+
+/* OnClick */
+.wex-navbar-nav > li > a:active {
+    background-color: @navbar-nav-onclick-background;
+    color: @navbar-nav-onclick-color;
+    .hook-navbar-nav-onclick;
+}
+
+/* Active */
+.wex-navbar-nav > li.wex-active > a {
+    background-color: @navbar-nav-active-background;
+    color: @navbar-nav-active-color;
+    .hook-navbar-nav-active;
+}
+
+
+/* Sub-objects: `wex-navbar-nav-subtitle`
+ ========================================================================== */
+
+.wex-navbar-nav .wex-navbar-nav-subtitle { line-height: @navbar-nav-line-height - @navbar-nav-subtitle-font-size - @navbar-nav-subtitle-offset; }
+
+.wex-navbar-nav-subtitle > div {
+    margin-top: ((@navbar-nav-line-height - @navbar-nav-subtitle-font-size - @navbar-nav-font-size) / -2) + @navbar-nav-subtitle-offset;
+    font-size: @navbar-nav-subtitle-font-size;
+    line-height: @navbar-nav-subtitle-font-size + @navbar-nav-subtitle-offset;
+}
+
+
+/* Sub-objects: `wex-navbar-content`, `wex-navbar-brand`, `wex-navbar-toggle`
+ ========================================================================== */
+
+/*
+ * Imitate navbar items
+ */
+
+.wex-navbar-content,
+.wex-navbar-brand,
+.wex-navbar-toggle {
+    box-sizing: border-box;
+    display: block;
+    height: @navbar-nav-height;
+    padding: 0 @navbar-nav-padding-horizontal;
+    float: left;
+    .hook-navbar-content;
+}
+
+/*
+ * Helper to center all child elements vertically
+ */
+
+.wex-navbar-content:before,
+.wex-navbar-brand:before,
+.wex-navbar-toggle:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+
+/* Sub-objects: `wex-navbar-content`
+ ========================================================================== */
+
+/*
+ * Better sibling spacing
+ */
+
+.wex-navbar-content + .wex-navbar-content:not(.wex-navbar-center) { padding-left: 0; }
+
+/*
+ * Link colors
+ */
+
+.wex-navbar-content > a:not([class]) { color: @navbar-link-color; }
+.wex-navbar-content > a:not([class]):hover { color: @navbar-link-hover-color; }
+
+
+/* Sub-objects: `wex-navbar-brand`
+ ========================================================================== */
+
+.wex-navbar-brand {
+    font-size: @navbar-brand-font-size;
+    color: @navbar-brand-color;
+    text-decoration: none;
+}
+
+/*
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+
+.wex-navbar-brand:hover,
+.wex-navbar-brand:focus { // 1
+    color: @navbar-brand-hover-color;
+    text-decoration: none;
+    /* 2 */
+    outline: none;
+}
+
+
+/* Sub-object: `wex-navbar-toggle`
+ ========================================================================== */
+
+.wex-navbar-toggle {
+    font-size: @navbar-toggle-font-size;
+    color: @navbar-toggle-color;
+    text-decoration: none;
+}
+
+/*
+ * 1. Apply hover style also to focus state
+ * 2. Remove default focus style
+ */
+
+.wex-navbar-toggle:hover,
+.wex-navbar-toggle:focus { // 1
+    color: @navbar-toggle-hover-color;
+    text-decoration: none;
+    /* 2 */
+    outline: none;
+}
+
+/*
+ * 1. Center icon vertically
+ */
+
+.wex-navbar-toggle:after {
+    content: @navbar-toggle-icon;
+    font-family: FontAwesome;
+    /* 1 */
+    vertical-align: middle;
+}
+
+.wex-navbar-toggle-alt:after { content: @navbar-toggle-icon-alt; }
+
+
+/* Sub-object: `wex-navbar-center`
+ ========================================================================== */
+
+/*
+ * The element with this class needs to be last child in the navbar
+ * 1. This hack is needed because other float elements shift centered text
+ */
+
+.wex-navbar-center {
+    float: none;
+    text-align: center;
+    /* 1 */
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Sub-object: `wex-navbar-flip`
+ ========================================================================== */
+
+.wex-navbar-flip { float: right; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-navbar-misc;
+
+.hook-navbar() {}
+.hook-navbar-nav() {}
+.hook-navbar-nav-hover() {}
+.hook-navbar-nav-onclick() {}
+.hook-navbar-nav-active() {}
+.hook-navbar-content() {}
+.hook-navbar-misc() {}

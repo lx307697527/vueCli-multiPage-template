@@ -1,0 +1,71 @@
+// Name:            Description list
+// Description:     Defines styles for description lists
+//
+// Component:       `wex-description-list`
+//
+// Modifiers:       `wex-description-list-horizontal`
+//                  `wex-description-list-line`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@description-list-horizontal-width:             160px;
+@description-list-horizontal-margin-left:       180px;
+
+@description-list-line-margin-top:              5px;
+@description-list-line-border-width:            1px;
+@description-list-line-border:                  #ddd;
+@description-list-line-color:                   #999;
+
+@description-list-line-font-weight:             normal;
+
+
+/* ========================================================================
+   Component: Description list
+ ========================================================================== */
+
+
+/* Modifier: `wex-description-list-horizontal`
+ ========================================================================== */
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .wex-description-list-horizontal { overflow: hidden; }
+
+    .wex-description-list-horizontal > dt {
+        width: @description-list-horizontal-width;
+        float: left;
+        clear: both;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .wex-description-list-horizontal > dd { margin-left: @description-list-horizontal-margin-left; }
+}
+
+
+/* Modifier: `wex-description-list-line`
+ ========================================================================== */
+
+.wex-description-list-line > dt { font-weight: @description-list-line-font-weight; }
+
+.wex-description-list-line > dt:nth-child(n+2) {
+    margin-top: @description-list-line-margin-top;
+    padding-top: @description-list-line-margin-top;
+    border-top: @description-list-line-border-width solid @description-list-line-border;
+}
+
+.wex-description-list-line > dd { color: @description-list-line-color; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-description-list-misc;
+
+.hook-description-list-misc() {}

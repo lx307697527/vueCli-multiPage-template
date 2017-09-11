@@ -1,0 +1,46 @@
+.wex-form{
+  .multiselect{
+    min-height: 30px;
+    &.wex-form-danger{
+      .multiselect__tags{
+        border-color: #dc8d99 !important;
+      }
+    }
+  }
+  .multiselect__tags{
+    border-radius: @global-border-radius;
+    min-height: 30px;
+    height: 30px;
+    padding: 5px 40px 0 8px;
+  }
+  .multiselect__input,
+  .multiselect__single{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 3px;
+    padding:0;
+  }
+
+  .multiselect__select{
+    height: 28px;
+    overflow: hidden;
+  }
+  .multiselect__option{
+    padding: 10px;
+  }
+  .multiselect__option--highlight{
+    color: #fff;
+    background: @base-color;
+  }
+  .multiselect__option--selected{
+    &.multiselect__option--highlight{
+      color: inherit;
+      background: #f3f3f3;
+    }
+  }
+  .multiselect__content{
+    border-bottom-left-radius: @global-border-radius;
+    border-bottom-right-radius: @global-border-radius;
+  }
+}

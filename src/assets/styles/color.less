@@ -1,0 +1,30 @@
+.color(@name, @color, @hover-rate) {
+  .color-@{name} {
+    color: @color !important; // &:hover,
+    // &:active {
+    //   color: darken(@color, @hover-rate) !important;
+    // }
+  }
+  .border-color-@{name} {
+    border-color: @color !important; // &:hover,
+    // &:active {
+    //   border-color: darken(@color, @hover-rate) !important;
+    // }
+  }
+  .bg-color-@{name} {
+    background-color: @color !important; // &:hover,
+    // &:active {
+    //   background-color: lighten(@color, @hover-rate) !important;
+    // }
+  }
+}
+
+.color(base, @base-color, 15%);
+.color(success, @success-color, 15%);
+.color(white, #fff, 0);
+.color(warning, @warning-color, 15%);
+.color(danger, @danger-color, 15%);
+.color(gray, @gray-color, 0);
+.color(gray-light, @gray-light-color, 0);
+.color(gray-lighter, @gray-lighter-color, 0);
+.color(gray-dark, @gray-dark-color, 0);

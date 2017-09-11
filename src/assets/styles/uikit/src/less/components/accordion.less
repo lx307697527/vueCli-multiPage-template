@@ -1,0 +1,94 @@
+// Name:            Accordion
+// Description:     Defines styles for the accordion
+//
+// Component:       `wex-accordion`
+//
+// Sub-objects:     `wex-accordion-title`
+//                  `wex-accordion-content`
+//
+// Markup:
+//
+// <!-- wex-accordion -->
+// <div class="wex-accordion" data-wex-accordion>
+//     <h3 class="wex-accordion-title"></h3>
+//     <div class="wex-accordion-content">
+//         <p></p>
+//     </div>
+// </div>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@accordion-title-margin-bottom:                 15px;
+@accordion-title-padding-vertical:              5px;
+@accordion-title-padding-horizontal:            15px;
+@accordion-title-font-size:                     18px;
+@accordion-title-line-height:                   24px;
+@accordion-title-background:                    #eee;
+
+@accordion-content-padding-horizontal:          @accordion-title-padding-horizontal;
+@accordion-content-padding-bottom:              @accordion-title-padding-horizontal;
+
+
+/* ========================================================================
+   Component: Accordion
+ ========================================================================== */
+
+.wex-accordion {
+    .hook-accordion;
+}
+
+/* Sub-object: `wex-accordion-title`
+ ========================================================================== */
+
+.wex-accordion-title {
+    margin-top: 0;
+    margin-bottom: @accordion-title-margin-bottom;
+    padding: @accordion-title-padding-vertical @accordion-title-padding-horizontal;
+    background: @accordion-title-background;
+    font-size: @accordion-title-font-size;
+    line-height: @accordion-title-line-height;
+    cursor: pointer;
+    .hook-accordion-title;
+}
+
+
+/* Sub-object: `wex-accordion-content`
+ ========================================================================== */
+
+.wex-accordion-content {
+    padding: 0 @accordion-content-padding-horizontal @accordion-content-padding-bottom @accordion-content-padding-horizontal;
+    .hook-accordion-content;
+}
+
+/*
+ * Micro clearfix to make panels more robust
+ */
+
+.wex-accordion-content:before,
+.wex-accordion-content:after {
+    content: "";
+    display: table;
+}
+
+.wex-accordion-content:after { clear: both; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+ .wex-accordion-content > :last-child { margin-bottom: 0; }
+
+
+// Hooks
+// ========================================================================
+
+.hook-accordion-misc;
+
+.hook-accordion() {}
+.hook-accordion-title() {}
+.hook-accordion-content() {}
+.hook-accordion-misc() {}
